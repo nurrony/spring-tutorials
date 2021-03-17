@@ -183,6 +183,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
         return buildResponseEntity(apiError);
     }
 
+    /**
+     * Javax Validation EntityNotFound Exception Handler
+     *
+     * @param EntityNotFoundException exception
+     * @return
+     */
     @ExceptionHandler(javax.persistence.EntityNotFoundException.class)
     protected ResponseEntity<Object> handleEntityNotFound(javax.persistence.EntityNotFoundException exception) {
         return buildResponseEntity(new RestApiException(HttpStatus.NOT_FOUND, exception));
@@ -195,6 +201,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
         return buildResponseEntity(new RestApiException(HttpStatus.INTERNAL_SERVER_ERROR, error, ex));
     }
 
+    @Override
+    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(
+            HttpRequestMethodNotSupportedException exception, HttpHeaders headers, HttpStatus status,
+            WebRequest request) {
+        return buildResponseEntity(
+                new RestApiException(HttpStatus.METHOD_NOT_ALLOWED, "NMR Method not allowed", exception));
+    }
+
     @ExceptionHandler(DataIntegrityViolationException.class)
     protected ResponseEntity<Object> handleDataIntegrityViolation(DataIntegrityViolationException exception,
             WebRequest request) {
@@ -205,14 +219,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
         return buildResponseEntity(new RestApiException(HttpStatus.INTERNAL_SERVER_ERROR, exception));
     }
 
-    @Override
-    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(
-            HttpRequestMethodNotSupportedException exception, HttpHeaders headers, HttpStatus status,
-            WebRequest request) {
-        return buildResponseEntity(
-                new RestApiException(HttpStatus.METHOD_NOT_ALLOWED, "NMR Method not allowed", exception));
-    }
-
+    /**
+     * AccessDeniedException handler from Spring Security
+     *
+     * @param request
+     * @param exception
+     * @return ResApiException
+     */
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<Object> handleAccessDeniedException(HttpServletRequest request,
             AccessDeniedException exception) {
@@ -246,6 +259,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
                 new RestApiException(HttpStatus.UNAUTHORIZED, "Full authentication is required", exception));
     }
 
+    /**
+     * AuthenticationException handler from Spring Security
+     *
+     * @param request
+     * @param exception
+     * @return ResApiException
+     */
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<Object> handleAuthenticationException(HttpServletRequest request,
             MalformedJwtException exception) {
@@ -281,7 +301,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
     public ResponseEntity<Object> handleAllUncaughtException(Exception exception, WebRequest request) {
         log.error("Unknown error occurred", exception);
         return buildResponseEntity(
-                new RestApiException(HttpStatus.INTERNAL_SERVER_ERROR, "Unknown error occurred", exception));
+                new RestApiException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage(), exception));
     }
 
 }
