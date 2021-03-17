@@ -1,5 +1,4 @@
-package info.nmrony.spring.tutorials.springplayground.configs.exceptions;
-
+package info.nmrony.spring.tutorials.springplayground.domain.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.jsontype.impl.TypeIdResolverBase;

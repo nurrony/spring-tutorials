@@ -8,7 +8,9 @@ import lombok.EqualsAndHashCode;
 import lombok.Value;
 
 /**
- * GeneralGeneralSuccessResponse
+ * Api Success Response
+ *
+ * @author Nur Rony
  */
 public class SuccessResponse<T> {
 
@@ -18,35 +20,36 @@ public class SuccessResponse<T> {
     }
 
     @Builder(builderMethodName = "WithResource")
-    public static <T> WithResource<T> withResourceResponse(@NotBlank int statusCode, @NotBlank String message, @NotNull T data) {
+    public static <T> WithResource<T> withResourceResponse(@NotBlank int statusCode, @NotBlank String message,
+            @NotNull T data) {
         return new WithResource<>(statusCode, message, data);
     }
 
     @Builder(builderMethodName = "WithPaginatedResourceCollection")
-    public static <T> WithPaginatedResourceCollection<T> withResourceResponse(@NotBlank int statusCode, @NotBlank String message, int page, @NotNull int size, @NotNull int totalPage, @NotNull long totalRecord, @NotNull T data) {
+    public static <T> WithPaginatedResourceCollection<T> withResourceResponse(@NotBlank int statusCode,
+            @NotBlank String message, int page, @NotNull int size, @NotNull int totalPage, @NotNull long totalRecord,
+            @NotNull T data) {
         return new WithPaginatedResourceCollection<>(statusCode, message, page, size, totalPage, totalRecord, data);
-
     }
 
     @Value
     @EqualsAndHashCode(callSuper = true)
-    public static class SimpleResponse extends AppSuccessResponse {
+    public static class SimpleResponse extends ApiSuccessResponse {
         int statusCode;
         String message;
     }
 
     @Value
     @EqualsAndHashCode(callSuper = true)
-    public static class WithResource<T> extends AppSuccessResponse {
+    public static class WithResource<T> extends ApiSuccessResponse {
         int statusCode;
         String message;
         T data;
     }
 
-
     @Value
     @EqualsAndHashCode(callSuper = true)
-    public static class WithPaginatedResourceCollection<T> extends AppSuccessResponse {
+    public static class WithPaginatedResourceCollection<T> extends ApiSuccessResponse {
         int statusCode;
         String message;
         int page;

@@ -9,8 +9,6 @@ import info.nmrony.spring.tutorials.springplayground.domain.responses.SuccessRes
 import info.nmrony.spring.tutorials.springplayground.domain.responses.SuccessResponse.WithResource;
 
 final public class ResponseUtils {
-
-
   final public static SuccessResponse.SimpleResponse buildResponse(String message, int statusCode) {
     return SuccessResponse.SimpleResponse().message(message).statusCode(statusCode).build();
   }

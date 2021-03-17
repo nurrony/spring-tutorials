@@ -6,11 +6,15 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import info.nmrony.spring.tutorials.springplayground.domain.entities.Role;
+import info.nmrony.spring.tutorials.springplayground.rest.exceptions.PasswordsEqualConstraint;
+import info.nmrony.spring.tutorials.springplayground.rest.exceptions.UsernameExistConstraint;
 import lombok.Data;
 
 @Data
+@PasswordsEqualConstraint(message = "Passwords are not matched")
 public class CreateUserRequest {
   @NotBlank
+  @UsernameExistConstraint(message = "username already taken")
   private String username;
 
   @NotBlank
@@ -27,7 +31,7 @@ public class CreateUserRequest {
   private String password;
 
   @NotBlank
-  private String rePassword;
+  private String confirmPassword;
 
   private Set<Role> roles;
 

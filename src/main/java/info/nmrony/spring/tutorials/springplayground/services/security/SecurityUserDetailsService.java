@@ -15,11 +15,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityUserDetailsService implements UserDetailsService {
 
-  private final UserService userService;
+    private final UserService userService;
 
-  @Override
-  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    var user = userService.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException(User.class, username));
-    return SecurityUserDetails.fromEntity(user);
-  }
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        var user = userService.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException(User.class, username));
+        return SecurityUserDetails.fromEntity(user);
+    }
 }

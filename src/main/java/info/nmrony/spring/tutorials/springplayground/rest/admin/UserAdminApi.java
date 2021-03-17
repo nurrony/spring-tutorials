@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import info.nmrony.spring.tutorials.springplayground.domain.constants.Roles;
-import info.nmrony.spring.tutorials.springplayground.domain.exceptions.ApiResponse;
+import info.nmrony.spring.tutorials.springplayground.domain.responses.ApiResponse;
 import info.nmrony.spring.tutorials.springplayground.rest.dtos.CreateUserRequest;
 import info.nmrony.spring.tutorials.springplayground.rest.dtos.UpdateUserRequest;
 import info.nmrony.spring.tutorials.springplayground.rest.dtos.UserView;
@@ -32,7 +32,7 @@ public class UserAdminApi {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse> create(@RequestBody @Valid CreateUserRequest request) {
+    public ResponseEntity<ApiResponse> create(@RequestBody @Valid CreateUserRequest request) throws Exception {
         return ResponseEntity.ok().body(
                 ResponseUtils.buildResourceResponse(userService.create(request), "User created successfully", 200));
     }

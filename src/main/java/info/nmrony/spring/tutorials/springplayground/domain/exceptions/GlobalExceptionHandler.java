@@ -1,4 +1,4 @@
-package info.nmrony.spring.tutorials.springplayground.configs.exceptions;
+package info.nmrony.spring.tutorials.springplayground.domain.exceptions;
 
 import javax.naming.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
@@ -28,9 +28,6 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import info.nmrony.spring.tutorials.springplayground.domain.exceptions.ApiException;
-import info.nmrony.spring.tutorials.springplayground.domain.exceptions.ResourceNotFoundException;
-import info.nmrony.spring.tutorials.springplayground.domain.exceptions.RestApiException;
 import io.jsonwebtoken.MalformedJwtException;
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,6 +35,10 @@ import lombok.extern.slf4j.Slf4j;
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler implements ApiException {
+
+    private ResponseEntity<Object> buildResponseEntity(RestApiException apiError) {
+        return new ResponseEntity<>(apiError, apiError.getName());
+    }
 
     /**
      * Handle MissingServletRequestParameterException. Triggered when a 'required'
@@ -100,36 +101,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
     }
 
     /**
-     * Handles javax.validation.ConstraintViolationException. Thrown when @Validated
-     * fails.
-     *
-     * @param exception the ConstraintViolationException
-     * @return the Error object
-     */
-    @ExceptionHandler(javax.validation.ConstraintViolationException.class)
-    protected ResponseEntity<Object> handleConstraintViolation(
-            javax.validation.ConstraintViolationException exception) {
-        RestApiException apiError = new RestApiException(HttpStatus.BAD_REQUEST);
-        apiError.setMessage("Validation error");
-        apiError.addValidationErrors(exception.getConstraintViolations());
-        return buildResponseEntity(apiError);
-    }
-
-    /**
-     * Handles NotFoundException. Created to encapsulate errors with more detail
-     * than javax.persistence.NotFoundException.
-     *
-     * @param exception the NotFoundException
-     * @return the Error object
-     */
-    @ExceptionHandler(ResourceNotFoundException.class)
-    protected ResponseEntity<Object> handleEntityNotFound(ResourceNotFoundException exception) {
-        RestApiException apiError = new RestApiException(HttpStatus.NOT_FOUND);
-        apiError.setMessage(exception.getMessage());
-        return buildResponseEntity(apiError);
-    }
-
-    /**
      * Handle HttpMessageNotReadableException. Happens when request JSON is
      * malformed.
      *
@@ -168,6 +139,35 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
     }
 
     /**
+     * Handles javax.validation.ConstraintViolationException. Thrown when @Validated
+     * fails.
+     *
+     * @param exception the ConstraintViolationException
+     * @return the Error object
+     */
+    @ExceptionHandler(ConstraintViolationException.class)
+    protected ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException exception) {
+        RestApiException apiError = new RestApiException(HttpStatus.BAD_REQUEST);
+        apiError.setMessage("Validation error");
+        apiError.addValidationErrors(exception.getConstraintViolations());
+        return buildResponseEntity(apiError);
+    }
+
+    /**
+     * Handles NotFoundException. Created to encapsulate errors with more detail
+     * than javax.persistence.NotFoundException.
+     *
+     * @param exception the NotFoundException
+     * @return the Error object
+     */
+    @ExceptionHandler(ResourceNotFoundException.class)
+    protected ResponseEntity<Object> handleEntityNotFound(ResourceNotFoundException exception) {
+        RestApiException apiError = new RestApiException(HttpStatus.NOT_FOUND);
+        apiError.setMessage(exception.getMessage());
+        return buildResponseEntity(apiError);
+    }
+
+    /**
      * Handle Exception, handle generic Exception.class
      *
      * @param exception the Exception
@@ -183,17 +183,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
         return buildResponseEntity(apiError);
     }
 
-    private ResponseEntity<Object> buildResponseEntity(RestApiException apiError) {
-        return new ResponseEntity<>(apiError, apiError.getName());
-    }
-
     @ExceptionHandler(javax.persistence.EntityNotFoundException.class)
     protected ResponseEntity<Object> handleEntityNotFound(javax.persistence.EntityNotFoundException exception) {
         return buildResponseEntity(new RestApiException(HttpStatus.NOT_FOUND, exception));
     }
 
     @Override
-    protected ResponseEntity<Object> handleHttpMessageNotWritable(HttpMessageNotWritableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleHttpMessageNotWritable(HttpMessageNotWritableException ex,
+            HttpHeaders headers, HttpStatus status, WebRequest request) {
         String error = "Error writing JSON output";
         return buildResponseEntity(new RestApiException(HttpStatus.INTERNAL_SERVER_ERROR, error, ex));
     }
@@ -202,30 +199,36 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
     protected ResponseEntity<Object> handleDataIntegrityViolation(DataIntegrityViolationException exception,
             WebRequest request) {
         if (exception.getCause() instanceof ConstraintViolationException) {
-            return buildResponseEntity(new RestApiException(HttpStatus.CONFLICT, "Database error", exception.getCause()));
+            return buildResponseEntity(
+                    new RestApiException(HttpStatus.CONFLICT, "Database error", exception.getCause()));
         }
         return buildResponseEntity(new RestApiException(HttpStatus.INTERNAL_SERVER_ERROR, exception));
     }
 
     @Override
-    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException exception,
-            HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return buildResponseEntity(new RestApiException(HttpStatus.METHOD_NOT_ALLOWED, "NMR Method not allowed", exception));
+    protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(
+            HttpRequestMethodNotSupportedException exception, HttpHeaders headers, HttpStatus status,
+            WebRequest request) {
+        return buildResponseEntity(
+                new RestApiException(HttpStatus.METHOD_NOT_ALLOWED, "NMR Method not allowed", exception));
     }
 
     @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<Object> handleAccessDeniedException(HttpServletRequest request, AccessDeniedException exception) {
+    public ResponseEntity<Object> handleAccessDeniedException(HttpServletRequest request,
+            AccessDeniedException exception) {
         log.error("handleAccessDeniedException {}\n", request.getRequestURI(), exception);
 
-        return buildResponseEntity(new RestApiException(HttpStatus.FORBIDDEN, "You are not allowed to access this endpoint", exception));
+        return buildResponseEntity(
+                new RestApiException(HttpStatus.FORBIDDEN, "You are not allowed to access this endpoint", exception));
     }
 
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<Object> handleBadCredentialsException(HttpServletRequest request, BadCredentialsException exception) {
+    public ResponseEntity<Object> handleBadCredentialsException(HttpServletRequest request,
+            BadCredentialsException exception) {
         log.error("handleAccessDeniedException {}\n", request.getRequestURI(), exception);
-        return buildResponseEntity(new RestApiException(HttpStatus.UNAUTHORIZED, "credential is not correct.", exception));
+        return buildResponseEntity(
+                new RestApiException(HttpStatus.UNAUTHORIZED, "credential is not correct.", exception));
     }
-
 
     /**
      * Handles NotFoundException. Created to encapsulate errors with more detail
@@ -235,17 +238,21 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return the Error object
      */
     @ExceptionHandler(MalformedJwtException.class)
-    public ResponseEntity<Object> handleMalformedJwtException(HttpServletRequest request, MalformedJwtException exception) {
+    public ResponseEntity<Object> handleMalformedJwtException(HttpServletRequest request,
+            MalformedJwtException exception) {
         log.error("handleAccessDeniedException {}\n", request.getRequestURI(), exception);
 
-        return buildResponseEntity(new RestApiException(HttpStatus.UNAUTHORIZED, "Full authentication is required", exception));
+        return buildResponseEntity(
+                new RestApiException(HttpStatus.UNAUTHORIZED, "Full authentication is required", exception));
     }
 
     @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<Object> handleAuthenticationException(HttpServletRequest request, MalformedJwtException exception) {
+    public ResponseEntity<Object> handleAuthenticationException(HttpServletRequest request,
+            MalformedJwtException exception) {
         log.error("handleAccessDeniedException {}\n", request.getRequestURI(), exception);
 
-        return buildResponseEntity(new RestApiException(HttpStatus.UNAUTHORIZED, "Full authentication is required", exception));
+        return buildResponseEntity(
+                new RestApiException(HttpStatus.UNAUTHORIZED, "Full authentication is required", exception));
     }
 
     /**
@@ -255,10 +262,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return the Error object
      */
     @ExceptionHandler(InsufficientAuthenticationException.class)
-    public ResponseEntity<Object> handleAccessDeniedException(HttpServletRequest request, InsufficientAuthenticationException exception) {
+    public ResponseEntity<Object> handleAccessDeniedException(HttpServletRequest request,
+            InsufficientAuthenticationException exception) {
         log.error("handleAccessDeniedException {}\n", request.getRequestURI(), exception);
 
-        return buildResponseEntity(new RestApiException(HttpStatus.FORBIDDEN, "You are not allowed to access this endpoint", exception));
+        return buildResponseEntity(
+                new RestApiException(HttpStatus.FORBIDDEN, "You are not allowed to access this endpoint", exception));
     }
 
     /**
@@ -271,7 +280,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<Object> handleAllUncaughtException(Exception exception, WebRequest request) {
         log.error("Unknown error occurred", exception);
-        return buildResponseEntity(new RestApiException(HttpStatus.INTERNAL_SERVER_ERROR, "Unknown error occurred", exception));
+        return buildResponseEntity(
+                new RestApiException(HttpStatus.INTERNAL_SERVER_ERROR, "Unknown error occurred", exception));
     }
 
 }

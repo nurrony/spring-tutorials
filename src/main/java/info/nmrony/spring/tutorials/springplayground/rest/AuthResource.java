@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import info.nmrony.spring.tutorials.springplayground.domain.entities.User;
-import info.nmrony.spring.tutorials.springplayground.domain.exceptions.ApiResponse;
+import info.nmrony.spring.tutorials.springplayground.domain.responses.ApiResponse;
 import info.nmrony.spring.tutorials.springplayground.rest.dtos.AuthRequest;
 import info.nmrony.spring.tutorials.springplayground.rest.mappers.AuthMapper;
 import info.nmrony.spring.tutorials.springplayground.services.UserService;
@@ -25,22 +25,22 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("api/auth")
 @RequiredArgsConstructor
 public class AuthResource {
-  private final UserService userService;
-  private final AuthMapper authMapper;
+    private final UserService userService;
+    private final AuthMapper authMapper;
 
-  @PostMapping("authenticate")
-  public ResponseEntity<ApiResponse> login(@RequestBody @Valid AuthRequest request) throws Exception {
-    try {
-      User user = userService.findWithRolesByUserNameAndPassword(request.getUsername(), request.getPassword());
-      if (!AppUtils.isNotNull(user)) {
-        throw new BadCredentialsException("Bad credential");
-      }
+    @PostMapping("authenticate")
+    public ResponseEntity<ApiResponse> login(@RequestBody @Valid AuthRequest request) throws Exception {
+        try {
+            User user = userService.findWithRolesByUserNameAndPassword(request.getUsername(), request.getPassword());
+            if (!AppUtils.isNotNull(user)) {
+                throw new BadCredentialsException("Bad credential");
+            }
 
-      return ResponseEntity.ok()
-          .body(ResponseUtils.buildResourceResponse(authMapper.toAuthResponse(request), "Authentication is successfull", 200));
-    } catch (BadCredentialsException | DisabledException exception) {
-      throw exception;
+            return ResponseEntity.ok().body(ResponseUtils.buildResourceResponse(authMapper.toAuthResponse(request),
+                    "Authentication is successfull", 200));
+        } catch (BadCredentialsException | DisabledException exception) {
+            throw exception;
+        }
     }
-  }
 
 }
