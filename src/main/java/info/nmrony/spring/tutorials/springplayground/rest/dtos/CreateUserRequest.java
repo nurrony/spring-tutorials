@@ -14,7 +14,7 @@ import lombok.Data;
 @PasswordsEqualConstraint(message = "Passwords are not matched")
 public class CreateUserRequest {
   @NotBlank
-  @UsernameExistConstraint(message = "username already taken")
+  @UsernameExistConstraint(message = "username is already taken")
   private String username;
 
   @NotBlank

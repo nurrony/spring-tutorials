@@ -9,7 +9,7 @@ Content-Type: application/json
   "lastName": "Rony",
   "password": "123456",
   "confirmPassword": "123456",
-  "email": "tofazzal@nmrony.info",
+  "email": "rony@nmrony.info",
   "username": "nmrony",
   "roles": [{"name": "ROLE_ADMIN"}, {"name": "ROLE_USER"}]
 }
