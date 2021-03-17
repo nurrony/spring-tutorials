@@ -5,8 +5,8 @@ POST {{APIURL}}/api/users/register HTTP/1.1
 Content-Type: application/json
 
 {
-  "firstName": "Tofazzal",
-  "lastName": "Hossain",
+  "firstName": "Nur",
+  "lastName": "Rony",
   "password": "123456",
   "confirmPassword": "123456",
   "email": "tofazzal@nmrony.info",
