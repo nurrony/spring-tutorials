@@ -25,7 +25,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
     @Autowired
     public void setTokenProvider(JwtTokenProvider tokenProvider) {
-      this.tokenProvider = tokenProvider;
+        this.tokenProvider = tokenProvider;
     }
 
     @Override

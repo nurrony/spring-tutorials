@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import info.nmrony.spring.tutorials.springplayground.domain.constants.Roles;
 import info.nmrony.spring.tutorials.springplayground.domain.responses.ApiResponse;
-import info.nmrony.spring.tutorials.springplayground.utils.ResponseUtils;
+import info.nmrony.spring.tutorials.springplayground.domain.utils.ResponseUtils;
 
 @RestController
 @RequestMapping("/api")

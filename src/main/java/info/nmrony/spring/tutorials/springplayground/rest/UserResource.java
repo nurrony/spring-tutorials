@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import info.nmrony.spring.tutorials.springplayground.domain.responses.ApiResponse;
+import info.nmrony.spring.tutorials.springplayground.domain.utils.ResponseUtils;
 import info.nmrony.spring.tutorials.springplayground.rest.dtos.CreateUserRequest;
 import info.nmrony.spring.tutorials.springplayground.services.UserService;
-import info.nmrony.spring.tutorials.springplayground.utils.ResponseUtils;
 import lombok.RequiredArgsConstructor;
 
 @RestController

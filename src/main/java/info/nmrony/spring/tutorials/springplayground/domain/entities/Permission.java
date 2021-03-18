@@ -21,38 +21,38 @@ import lombok.Setter;
 @Table(name = "permissions")
 public class Permission implements Serializable {
 
-  private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-  @Id
-  @NotNull
-  @Size(max = 50)
-  @Column(length = 50, unique = true)
-  private String name;
+    @Id
+    @NotNull
+    @Size(max = 50)
+    @Column(length = 50, unique = true)
+    private String name;
 
-  @ManyToMany(mappedBy = "permissions")
-  private Set<Role> roles;
+    @ManyToMany(mappedBy = "permissions")
+    private Set<Role> roles;
 
-  // ----------------- system related methods ------
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    Permission other = (Permission) obj;
-    return Objects.equals(name, other.getName());
-  }
+    // ----------------- system related methods ------
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Permission other = (Permission) obj;
+        return Objects.equals(name, other.getName());
+    }
 
-  @Override
-  public int hashCode() {
-    return name != null ? name.hashCode() : super.hashCode();
-  }
+    @Override
+    public int hashCode() {
+        return name != null ? name.hashCode() : super.hashCode();
+    }
 
-  @Override
-  public String toString() {
-    return "Permission[name = " + getName() + "]";
-  }
+    @Override
+    public String toString() {
+        return "Permission[name = " + getName() + "]";
+    }
 
 }

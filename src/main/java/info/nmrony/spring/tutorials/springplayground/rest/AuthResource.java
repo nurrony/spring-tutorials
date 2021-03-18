@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import info.nmrony.spring.tutorials.springplayground.domain.entities.User;
 import info.nmrony.spring.tutorials.springplayground.domain.responses.ApiResponse;
+import info.nmrony.spring.tutorials.springplayground.domain.utils.ResponseUtils;
 import info.nmrony.spring.tutorials.springplayground.rest.dtos.AuthRequest;
 import info.nmrony.spring.tutorials.springplayground.rest.mappers.AuthMapper;
 import info.nmrony.spring.tutorials.springplayground.services.UserService;
 import info.nmrony.spring.tutorials.springplayground.utils.AppUtils;
-import info.nmrony.spring.tutorials.springplayground.utils.ResponseUtils;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 

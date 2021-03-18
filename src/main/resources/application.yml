@@ -1,11 +1,11 @@
 spring:
   security:
     user:
-      password: nmrony
+      password:
   datasource:
-    url: jdbc:mysql://mysqlserver5/spring_playground?useUnicode=yes&charset=utf8mb4&collation=utf8mb4_unicode_ci&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC&zeroDateTimeBehavior=convertToNull
-    username: root
-    password: nmrony
+    url:
+    username:
+    password:
   jpa:
     # open-in-view: false
     show-sql: true
@@ -29,10 +29,3 @@ springdoc:
     path: /rest-api-docs
   swagger-ui:
     path: /swagger-ui
-
-application:
-  security:
-    jwt:
-      issuer: secure.nmrony.info
-      secret: zdtlD3JK56m6wTTgsNFhqzjqP
-      validity-in-seconds: 604800
