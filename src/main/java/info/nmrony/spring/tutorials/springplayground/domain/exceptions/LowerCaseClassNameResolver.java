@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.jsontype.impl.TypeIdResolverBase;
 public class LowerCaseClassNameResolver extends TypeIdResolverBase {
 
     @Override
-    public String idFromValue(Object value) {
-        String lowerCasedClassName = value.getClass().getSimpleName().toLowerCase();
+    public String idFromValue(final Object value) {
+        final String lowerCasedClassName = value.getClass().getSimpleName().toLowerCase();
         if (lowerCasedClassName.equals("restapiexception")) {
             return "error";
         }
@@ -15,7 +15,7 @@ public class LowerCaseClassNameResolver extends TypeIdResolverBase {
     }
 
     @Override
-    public String idFromValueAndType(Object value, Class<?> suggestedType) {
+    public String idFromValueAndType(final Object value, final Class<?> suggestedType) {
         return idFromValue(value);
     }
 

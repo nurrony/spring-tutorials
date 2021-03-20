@@ -13,26 +13,26 @@ import lombok.Data;
 @Data
 @PasswordsEqualConstraint(message = "Passwords are not matched")
 public class CreateUserRequest {
-  @NotBlank
-  @UsernameExistConstraint(message = "username is already taken")
-  private String username;
+    @NotBlank
+    @UsernameExistConstraint(message = "username is already taken")
+    private String username;
 
-  @NotBlank
-  @Email
-  private String email;
+    @NotBlank
+    @Email
+    private String email;
 
-  @NotBlank
-  private String firstName;
+    @NotBlank
+    private String firstName;
 
-  @NotBlank
-  private String lastName;
+    @NotBlank
+    private String lastName;
 
-  @NotBlank
-  private String password;
+    @NotBlank
+    private String password;
 
-  @NotBlank
-  private String confirmPassword;
+    @NotBlank
+    private String confirmPassword;
 
-  private Set<Role> roles;
+    private Set<Role> roles;
 
 }

@@ -32,32 +32,33 @@ public class UserAdminApi {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse> create(@RequestBody @Valid CreateUserRequest request) throws Exception {
+    public ResponseEntity<ApiResponse> create(@RequestBody @Valid final CreateUserRequest request) throws Exception {
         return ResponseEntity.ok().body(
                 ResponseUtils.buildResourceResponse(userService.create(request), "User created successfully", 200));
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<ApiResponse> update(@PathVariable Long id, @RequestBody @Valid UpdateUserRequest request) {
+    public ResponseEntity<ApiResponse> update(@PathVariable final Long id,
+            @RequestBody @Valid final UpdateUserRequest request) {
         return ResponseEntity.ok().body(
                 ResponseUtils.buildResourceResponse(userService.update(id, request), "data updated successfully", 200));
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable final Long id) {
         userService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<ApiResponse> get(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse> get(@PathVariable final Long id) {
         return ResponseEntity.ok()
                 .body(ResponseUtils.buildResourceResponse(userService.getUser(id), "data fetched successfully", 200));
     }
 
 
     @GetMapping
-    public ResponseEntity<ApiResponse> getAll(Pageable pageable) {
+    public ResponseEntity<ApiResponse> getAll(final Pageable pageable) {
         return ResponseEntity.ok().body(
                 ResponseUtils.<UserView>buildPaginatedResponse(userService.list(pageable), "Users fetched successfully", 200));
     }

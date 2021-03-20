@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtTokenFilter jwtTokenFilter;
 
     @Autowired
-    public void setJwtTokenFilter(JwtTokenFilter jwtTokenFilter) {
+    public void setJwtTokenFilter(final JwtTokenFilter jwtTokenFilter) {
         this.jwtTokenFilter = jwtTokenFilter;
     }
 

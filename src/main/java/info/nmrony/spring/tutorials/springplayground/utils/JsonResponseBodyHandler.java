@@ -15,27 +15,27 @@ public class JsonResponseBodyHandler<T> implements HttpResponse.BodyHandler<Supp
 
     private final Class<T> clazz;
 
-    public JsonResponseBodyHandler(Class<T> clazz) {
+    public JsonResponseBodyHandler(final Class<T> clazz) {
         this.clazz = clazz;
     }
 
     @Override
-    public HttpResponse.BodySubscriber<Supplier<T>> apply(HttpResponse.ResponseInfo responseInfo) {
+    public HttpResponse.BodySubscriber<Supplier<T>> apply(final HttpResponse.ResponseInfo responseInfo) {
         return asJSON(clazz);
     }
 
-    public static <T> HttpResponse.BodySubscriber<Supplier<T>> asJSON(Class<T> targetType) {
-        HttpResponse.BodySubscriber<InputStream> upstream = HttpResponse.BodySubscribers.ofInputStream();
+    public static <T> HttpResponse.BodySubscriber<Supplier<T>> asJSON(final Class<T> targetType) {
+        final HttpResponse.BodySubscriber<InputStream> upstream = HttpResponse.BodySubscribers.ofInputStream();
 
         return HttpResponse.BodySubscribers.mapping(upstream, inputStream -> toSupplierOfType(inputStream, targetType));
     }
 
-    public static <T> Supplier<T> toSupplierOfType(InputStream inputStream, Class<T> targetType) {
+    public static <T> Supplier<T> toSupplierOfType(final InputStream inputStream, final Class<T> targetType) {
         return () -> {
             try (InputStream stream = inputStream) {
-                ObjectMapper objectMapper = new ObjectMapper();
+                final ObjectMapper objectMapper = new ObjectMapper();
                 return objectMapper.readValue(stream, targetType);
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 throw new UncheckedIOException(e);
             }
         };

@@ -22,9 +22,9 @@ public class UserResource {
     private final UserService userService;
 
     @PostMapping("register")
-    public ResponseEntity<ApiResponse> register(@RequestBody @Valid CreateUserRequest request) throws Exception {
-        return ResponseEntity.ok().body(
-                ResponseUtils.buildResourceResponse(userService.create(request), "Registration successful", 200));
+    public ResponseEntity<ApiResponse> register(@RequestBody @Valid final CreateUserRequest request) throws Exception {
+        return ResponseEntity.ok()
+                .body(ResponseUtils.buildResourceResponse(userService.create(request), "Registration successful", 200));
     }
 
 }

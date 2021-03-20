@@ -24,16 +24,16 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     private JwtTokenProvider tokenProvider;
 
     @Autowired
-    public void setTokenProvider(JwtTokenProvider tokenProvider) {
+    public void setTokenProvider(final JwtTokenProvider tokenProvider) {
         this.tokenProvider = tokenProvider;
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
+    protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response,
+            final FilterChain filterChain) throws ServletException, IOException {
         getJwtFromRequest(request).ifPresent(token -> {
             if (tokenProvider.validate(token)) {
-                Authentication authentication = tokenProvider.getAuthentication(token);
+                final Authentication authentication = tokenProvider.getAuthentication(token);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         });
@@ -41,8 +41,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 
-    private static Optional<String> getJwtFromRequest(HttpServletRequest request) {
-        String bearerToken = request.getHeader(AUTHORIZATION);
+    private static Optional<String> getJwtFromRequest(final HttpServletRequest request) {
+        final String bearerToken = request.getHeader(AUTHORIZATION);
         return (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER))
                 ? Optional.of(bearerToken.split(" ")[1].trim())
                 : Optional.empty();

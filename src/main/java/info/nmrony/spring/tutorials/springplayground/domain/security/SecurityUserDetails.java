@@ -26,8 +26,8 @@ public class SecurityUserDetails implements UserDetails {
     private Collection<? extends GrantedAuthority> authorities;
 
     // use Mapper
-    public static UserDetails fromEntity(User user) {
-        SecurityUserDetails securityUserDetails = new SecurityUserDetails();
+    public static UserDetails fromEntity(final User user) {
+        final SecurityUserDetails securityUserDetails = new SecurityUserDetails();
         securityUserDetails.email = user.getEmail();
         securityUserDetails.username = user.getUsername();
         securityUserDetails.password = user.getPassword();

@@ -21,18 +21,32 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI apiInfo() {
         final String securitySchemeName = "bearerAuth";
-        // @formatter: off
-        return new OpenAPI().addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
-                .components(new Components().addSecuritySchemes(securitySchemeName, new SecurityScheme()
-                        .name(securitySchemeName).type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")))
-                .info(buildApiInformation());
-        // @formatter: on
+        // @formatter:off
+        return new OpenAPI()
+            .info(buildApiInformation())
+            .addSecurityItem(
+                new SecurityRequirement()
+                    .addList(securitySchemeName)
+                ).components(
+                    new Components()
+                        .addSecuritySchemes(securitySchemeName,
+                            new SecurityScheme()
+                                .name(securitySchemeName)
+                                .type(SecurityScheme.Type.HTTP)
+                                .scheme("bearer")
+                                .bearerFormat("JWT")
+                        )
+                );
+        // @formatter:on
     }
 
     private Info buildApiInformation() {
-        // @formatter: off
-        return new Info().version("1.0").title("Spring Playground").description("Spring playgroud of Nur Rony");
-        // @formatter: on
+        // @formatter:off
+        return new Info()
+            .version("1.0")
+            .title("Spring Playground")
+            .description("Spring playgroud of Nur Rony");
+        // @formatter:on
     }
 
 }

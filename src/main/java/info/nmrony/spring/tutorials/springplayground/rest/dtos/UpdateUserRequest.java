@@ -10,12 +10,12 @@ import lombok.Data;
 @Data
 public class UpdateUserRequest {
 
-  @NotBlank
-  private String firstName;
+    @NotBlank
+    private String firstName;
 
-  @NotBlank
-  private String lastName;
+    @NotBlank
+    private String lastName;
 
-  private Set<Role> roles;
+    private Set<Role> roles;
 
 }

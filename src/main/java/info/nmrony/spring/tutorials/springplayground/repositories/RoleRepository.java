@@ -8,5 +8,4 @@ import info.nmrony.spring.tutorials.springplayground.domain.entities.Role;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, String> {
-
 }

@@ -5,4 +5,5 @@ import info.nmrony.spring.tutorials.springplayground.domain.responses.ApiRespons
 /**
  * Created by Nur Rony
  */
-public interface ApiException extends ApiResponse {}
+public interface ApiException extends ApiResponse {
+}

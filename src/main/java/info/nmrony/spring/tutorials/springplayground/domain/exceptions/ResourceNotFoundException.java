@@ -27,8 +27,16 @@ public class ResourceNotFoundException extends RuntimeException implements ApiEx
     private static <K, V> Map<K, V> toMap(final Class<K> keyType, final Class<V> valueType, final String... entries) {
         if (entries.length % 2 == 1)
             throw new IllegalArgumentException("Invalid entries");
-        return IntStream.range(0, entries.length / 2).map(i -> i * 2).collect(HashMap::new,
-                (m, i) -> m.put(keyType.cast(entries[i]), valueType.cast(entries[i + 1])), Map::putAll);
+        // @formatter:off
+        return IntStream
+            .range(0, entries.length / 2)
+            .map(i -> i * 2)
+            .collect(
+                HashMap::new,
+                (m, i) -> m.put(keyType.cast(entries[i]),
+                valueType.cast(entries[i + 1])
+            ), Map::putAll);
+        // @formatter:on
     }
 
 }

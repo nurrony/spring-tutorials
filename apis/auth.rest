@@ -33,6 +33,6 @@ Content-Type: application/json
 Authorization: {{AccessToken}}
 
 ###
-GET {{APIURL}}/api/users HTTP/1.1
+GET {{APIURL}}/api/all?name=ROLE_ADMIN HTTP/1.1
 Content-Type: application/json
 Authorization: {{AccessToken}}

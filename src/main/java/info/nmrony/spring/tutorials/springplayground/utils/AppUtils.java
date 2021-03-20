@@ -9,19 +9,19 @@ public final class AppUtils {
         throw new IllegalStateException("Application Utility Class");
     }
 
-    final public static boolean isMapValueNullOrEmpty(Map.Entry<?, String> entry) {
+    final public static boolean isMapValueNullOrEmpty(final Map.Entry<?, String> entry) {
         return entry.getValue() != null && !entry.getValue().isEmpty();
     }
 
-    final public static boolean isStringNullOrEmpty(String str) {
+    final public static boolean isStringNullOrEmpty(final String str) {
         return str != null && str.isBlank();
     }
 
-    final public static boolean isCollectionNullOrEmpty(Collection<?> collection) {
+    final public static boolean isCollectionNullOrEmpty(final Collection<?> collection) {
         return collection != null && collection.isEmpty();
     }
 
-    final public static boolean isNotNull(Object item) {
+    final public static boolean isNotNull(final Object item) {
         return item != null;
     }
 

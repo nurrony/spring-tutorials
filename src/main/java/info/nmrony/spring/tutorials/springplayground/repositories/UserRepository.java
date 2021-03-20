@@ -29,8 +29,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
   Optional<User> findById(Long id);
 
   @Cacheable
-  default User getById(Long id) {
-    Optional<User> optionalUser = findById(id);
+  default User getById(final Long id) {
+      final Optional<User> optionalUser = findById(id);
     if (optionalUser.isEmpty()) {
       throw new ResourceNotFoundException(User.class, id);
     }

@@ -36,7 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler implements ApiException {
 
-    private ResponseEntity<Object> buildResponseEntity(RestApiException apiError) {
+    private ResponseEntity<Object> buildResponseEntity(final RestApiException apiError) {
         return new ResponseEntity<>(apiError, apiError.getName());
     }
 
@@ -52,9 +52,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      */
     @Override
     protected ResponseEntity<Object> handleMissingServletRequestParameter(
-            MissingServletRequestParameterException exception, HttpHeaders headers, HttpStatus status,
-            WebRequest request) {
-        String error = exception.getParameterName() + " parameter is missing";
+            final MissingServletRequestParameterException exception, final HttpHeaders headers, final HttpStatus status,
+            final WebRequest request) {
+        final String error = exception.getParameterName() + " parameter is missing";
         return buildResponseEntity(new RestApiException(HttpStatus.BAD_REQUEST, error, exception));
     }
 
@@ -69,9 +69,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return the Error object
      */
     @Override
-    protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException exception,
-            HttpHeaders headers, HttpStatus status, WebRequest request) {
-        StringBuilder builder = new StringBuilder();
+    protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(final HttpMediaTypeNotSupportedException exception,
+            final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
+        final StringBuilder builder = new StringBuilder();
         builder.append(exception.getContentType());
         builder.append(" media type is not supported. Supported media types are ");
         exception.getSupportedMediaTypes().forEach(t -> builder.append(t).append(", "));
@@ -91,9 +91,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return the Error object
      */
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,
-            HttpHeaders headers, HttpStatus status, WebRequest request) {
-        RestApiException apiError = new RestApiException(HttpStatus.BAD_REQUEST);
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException exception,
+            final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
+        final RestApiException apiError = new RestApiException(HttpStatus.BAD_REQUEST);
         apiError.setMessage("Validation error");
         apiError.addValidationErrors(exception.getBindingResult().getFieldErrors());
         apiError.addValidationError(exception.getBindingResult().getGlobalErrors());
@@ -111,11 +111,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return the Error object
      */
     @Override
-    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException exception,
-            HttpHeaders headers, HttpStatus status, WebRequest request) {
-        ServletWebRequest servletWebRequest = (ServletWebRequest) request;
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(final HttpMessageNotReadableException exception,
+            final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
+        final ServletWebRequest servletWebRequest = (ServletWebRequest) request;
         log.info("{} to {}", servletWebRequest.getHttpMethod(), servletWebRequest.getRequest().getServletPath());
-        String error = "Malformed JSON request";
+        final String error = "Malformed JSON request";
         return buildResponseEntity(new RestApiException(HttpStatus.BAD_REQUEST, error, exception));
     }
 
@@ -129,9 +129,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return
      */
     @Override
-    protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException exception,
-            HttpHeaders headers, HttpStatus status, WebRequest request) {
-        RestApiException apiError = new RestApiException(HttpStatus.BAD_REQUEST);
+    protected ResponseEntity<Object> handleNoHandlerFoundException(final NoHandlerFoundException exception,
+            final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
+        final RestApiException apiError = new RestApiException(HttpStatus.BAD_REQUEST);
         apiError.setMessage(String.format("Could not find the %s method for URL %s", exception.getHttpMethod(),
                 exception.getRequestURL()));
         apiError.setDebugMessage(exception.getMessage());
@@ -146,8 +146,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return the Error object
      */
     @ExceptionHandler(ConstraintViolationException.class)
-    protected ResponseEntity<Object> handleConstraintViolation(ConstraintViolationException exception) {
-        RestApiException apiError = new RestApiException(HttpStatus.BAD_REQUEST);
+    protected ResponseEntity<Object> handleConstraintViolation(final ConstraintViolationException exception) {
+        final RestApiException apiError = new RestApiException(HttpStatus.BAD_REQUEST);
         apiError.setMessage("Validation error");
         apiError.addValidationErrors(exception.getConstraintViolations());
         return buildResponseEntity(apiError);
@@ -161,8 +161,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return the Error object
      */
     @ExceptionHandler(ResourceNotFoundException.class)
-    protected ResponseEntity<Object> handleEntityNotFound(ResourceNotFoundException exception) {
-        RestApiException apiError = new RestApiException(HttpStatus.NOT_FOUND);
+    protected ResponseEntity<Object> handleEntityNotFound(final ResourceNotFoundException exception) {
+        final RestApiException apiError = new RestApiException(HttpStatus.NOT_FOUND);
         apiError.setMessage(exception.getMessage());
         return buildResponseEntity(apiError);
     }
@@ -174,9 +174,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return the Error object
      */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    protected ResponseEntity<Object> handleMethodArgumentTypeMismatch(MethodArgumentTypeMismatchException exception,
-            WebRequest request) {
-        RestApiException apiError = new RestApiException(HttpStatus.BAD_REQUEST);
+    protected ResponseEntity<Object> handleMethodArgumentTypeMismatch(
+            final MethodArgumentTypeMismatchException exception, final WebRequest request) {
+        final RestApiException apiError = new RestApiException(HttpStatus.BAD_REQUEST);
         apiError.setMessage(String.format("The parameter '%s' of value '%s' could not be converted to type '%s'",
                 exception.getName(), exception.getValue(), exception.getRequiredType().getSimpleName()));
         apiError.setDebugMessage(exception.getMessage());
@@ -190,28 +190,28 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return
      */
     @ExceptionHandler(javax.persistence.EntityNotFoundException.class)
-    protected ResponseEntity<Object> handleEntityNotFound(javax.persistence.EntityNotFoundException exception) {
+    protected ResponseEntity<Object> handleEntityNotFound(final javax.persistence.EntityNotFoundException exception) {
         return buildResponseEntity(new RestApiException(HttpStatus.NOT_FOUND, exception));
     }
 
     @Override
-    protected ResponseEntity<Object> handleHttpMessageNotWritable(HttpMessageNotWritableException ex,
-            HttpHeaders headers, HttpStatus status, WebRequest request) {
-        String error = "Error writing JSON output";
+    protected ResponseEntity<Object> handleHttpMessageNotWritable(final HttpMessageNotWritableException ex,
+            final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
+        final String error = "Error writing JSON output";
         return buildResponseEntity(new RestApiException(HttpStatus.INTERNAL_SERVER_ERROR, error, ex));
     }
 
     @Override
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(
-            HttpRequestMethodNotSupportedException exception, HttpHeaders headers, HttpStatus status,
-            WebRequest request) {
+            final HttpRequestMethodNotSupportedException exception, final HttpHeaders headers, final HttpStatus status,
+            final WebRequest request) {
         return buildResponseEntity(
                 new RestApiException(HttpStatus.METHOD_NOT_ALLOWED, "NMR Method not allowed", exception));
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
-    protected ResponseEntity<Object> handleDataIntegrityViolation(DataIntegrityViolationException exception,
-            WebRequest request) {
+    protected ResponseEntity<Object> handleDataIntegrityViolation(final DataIntegrityViolationException exception,
+            final WebRequest request) {
         if (exception.getCause() instanceof ConstraintViolationException) {
             return buildResponseEntity(
                     new RestApiException(HttpStatus.CONFLICT, "Database error", exception.getCause()));
@@ -227,8 +227,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return ResApiException
      */
     @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<Object> handleAccessDeniedException(HttpServletRequest request,
-            AccessDeniedException exception) {
+    public ResponseEntity<Object> handleAccessDeniedException(final HttpServletRequest request,
+            final AccessDeniedException exception) {
         log.error("handleAccessDeniedException {}\n", request.getRequestURI(), exception);
 
         return buildResponseEntity(
@@ -236,8 +236,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
     }
 
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<Object> handleBadCredentialsException(HttpServletRequest request,
-            BadCredentialsException exception) {
+    public ResponseEntity<Object> handleBadCredentialsException(final HttpServletRequest request,
+            final BadCredentialsException exception) {
         log.error("handleAccessDeniedException {}\n", request.getRequestURI(), exception);
         return buildResponseEntity(
                 new RestApiException(HttpStatus.UNAUTHORIZED, "credential is not correct.", exception));
@@ -251,8 +251,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return the Error object
      */
     @ExceptionHandler(MalformedJwtException.class)
-    public ResponseEntity<Object> handleMalformedJwtException(HttpServletRequest request,
-            MalformedJwtException exception) {
+    public ResponseEntity<Object> handleMalformedJwtException(final HttpServletRequest request,
+            final MalformedJwtException exception) {
         log.error("handleAccessDeniedException {}\n", request.getRequestURI(), exception);
 
         return buildResponseEntity(
@@ -267,8 +267,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return ResApiException
      */
     @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<Object> handleAuthenticationException(HttpServletRequest request,
-            MalformedJwtException exception) {
+    public ResponseEntity<Object> handleAuthenticationException(final HttpServletRequest request,
+            final MalformedJwtException exception) {
         log.error("handleAccessDeniedException {}\n", request.getRequestURI(), exception);
 
         return buildResponseEntity(
@@ -282,8 +282,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return the Error object
      */
     @ExceptionHandler(InsufficientAuthenticationException.class)
-    public ResponseEntity<Object> handleAccessDeniedException(HttpServletRequest request,
-            InsufficientAuthenticationException exception) {
+    public ResponseEntity<Object> handleAccessDeniedException(final HttpServletRequest request,
+            final InsufficientAuthenticationException exception) {
         log.error("handleAccessDeniedException {}\n", request.getRequestURI(), exception);
 
         return buildResponseEntity(
@@ -298,7 +298,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      */
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResponseEntity<Object> handleAllUncaughtException(Exception exception, WebRequest request) {
+    public ResponseEntity<Object> handleAllUncaughtException(final Exception exception, final WebRequest request) {
         log.error("Unknown error occurred", exception);
         return buildResponseEntity(
                 new RestApiException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage(), exception));

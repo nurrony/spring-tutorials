@@ -34,14 +34,14 @@ public class Permission implements Serializable {
 
     // ----------------- system related methods ------
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Permission other = (Permission) obj;
+        final Permission other = (Permission) obj;
         return Objects.equals(name, other.getName());
     }
 

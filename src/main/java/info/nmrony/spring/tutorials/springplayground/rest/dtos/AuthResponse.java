@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class AuthResponse {
     private String token;
-    UserView user;
+    private UserView user;
 }

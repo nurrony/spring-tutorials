@@ -26,25 +26,26 @@ public @interface PasswordsEqualConstraint {
 
 class PasswordsEqualConstraintValidator implements ConstraintValidator<PasswordsEqualConstraint, Object> {
     @Override
-    public void initialize(PasswordsEqualConstraint arg0) {
+    public void initialize(final PasswordsEqualConstraint arg0) {
     }
 
     @Override
-    public boolean isValid(Object subject, ConstraintValidatorContext context) {
+    public boolean isValid(final Object subject, final ConstraintValidatorContext context) {
         try {
-            Method methodGetPassword = subject.getClass().getMethod("getPassword");
-            Method methodGetConfirmpassword = subject.getClass().getMethod("getConfirmPassword");
+            final Method methodGetPassword = subject.getClass().getMethod("getPassword");
+            final Method methodGetConfirmpassword = subject.getClass().getMethod("getConfirmPassword");
 
             if (methodGetPassword.invoke(subject) == null && methodGetConfirmpassword.invoke(subject) == null)
                 return true;
             else if (methodGetPassword.invoke(subject) == null)
                 return false;
-            return methodGetPassword.invoke(subject).equals(methodGetConfirmpassword.invoke(subject));
+            final boolean equals = methodGetPassword.invoke(subject).equals(methodGetConfirmpassword.invoke(subject));
+            return equals;
 
-        } catch (NoSuchMethodException ex) {
+        } catch (final NoSuchMethodException ex) {
             ex.printStackTrace();
             return false;
-        } catch (Exception ex) {
+        } catch (final Exception ex) {
             ex.printStackTrace();
             return false;
         }

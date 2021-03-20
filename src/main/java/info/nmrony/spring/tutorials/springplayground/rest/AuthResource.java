@@ -29,9 +29,10 @@ public class AuthResource {
     private final AuthMapper authMapper;
 
     @PostMapping("authenticate")
-    public ResponseEntity<ApiResponse> login(@RequestBody @Valid AuthRequest request) throws Exception {
+    public ResponseEntity<ApiResponse> login(@RequestBody @Valid final AuthRequest request) throws Exception {
         try {
-            User user = userService.findWithRolesByUserNameAndPassword(request.getUsername(), request.getPassword());
+            final User user = userService.findWithRolesByUserNameAndPassword(request.getUsername(),
+                    request.getPassword());
             if (!AppUtils.isNotNull(user)) {
                 throw new BadCredentialsException("Bad credential");
             }

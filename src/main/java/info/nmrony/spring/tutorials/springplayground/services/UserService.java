@@ -33,44 +33,44 @@ public class UserService {
     private final UserViewMapper userViewMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public UserView create(CreateUserRequest request) throws Exception {
+    public UserView create(final CreateUserRequest request) throws Exception {
         if (request.getRoles() == null) {
-            Role role = new Role();
+            final Role role = new Role();
             role.setName(Roles.USER);
             request.setRoles(Set.<Role>of(role));
         }
 
-        User user = userEditMapper.create(request);
+        final User user = userEditMapper.create(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         return userViewMapper.toUserView(userRepository.save(user));
     }
 
-    public Optional<User> findByUsername(String username) {
+    public Optional<User> findByUsername(final String username) {
         return userRepository.findByUsername(username);
     }
 
-    public Optional<User> findWithRolesByUsername(String username) {
+    public Optional<User> findWithRolesByUsername(final String username) {
         return userRepository.findWithRolesByUsername(username);
     }
 
-    public User findWithRolesByUserNameAndPassword(String username, String password) {
-        User user = findWithRolesByUsername(username)
+    public User findWithRolesByUserNameAndPassword(final String username, final String password) {
+        final User user = findWithRolesByUsername(username)
                 .orElseThrow(() -> new ResourceNotFoundException(User.class, username));
         return passwordEncoder.matches(password, user.getPassword()) ? user : null;
     }
 
-    public boolean usernameExists(String username) {
+    public boolean usernameExists(final String username) {
         return findByUsername(username).isPresent();
     }
 
     @Transactional
-    public UserView upsert(CreateUserRequest request) throws Exception {
-        Optional<User> optionalUser = findByUsername(request.getUsername());
+    public UserView upsert(final CreateUserRequest request) throws Exception {
+        final Optional<User> optionalUser = findByUsername(request.getUsername());
 
         if (optionalUser.isEmpty()) {
             return create(request);
         } else {
-            UpdateUserRequest updateUserRequest = new UpdateUserRequest();
+            final UpdateUserRequest updateUserRequest = new UpdateUserRequest();
             updateUserRequest.setFirstName(request.getFirstName());
             updateUserRequest.setLastName(request.getLastName());
             return update(optionalUser.get().getId(), updateUserRequest);
@@ -78,14 +78,14 @@ public class UserService {
     }
 
     @Transactional
-    public UserView update(Long id, UpdateUserRequest request) {
-        User user = userRepository.getById(id);
+    public UserView update(final Long id, final UpdateUserRequest request) {
+        final User user = userRepository.getById(id);
         userEditMapper.update(request, user);
         return userViewMapper.toUserView(userRepository.save(user));
     }
 
     @Transactional
-    public UserView delete(Long id) {
+    public UserView delete(final Long id) {
         User user = userRepository.getById(id);
         user.setUsername(user.getUsername().replace("@", String.format("_%s@", user.getId().toString())));
         user.setEnabled(false);
@@ -93,11 +93,11 @@ public class UserService {
         return userViewMapper.toUserView(user);
     }
 
-    public UserView getUser(Long id) {
+    public UserView getUser(final Long id) {
         return userViewMapper.toUserView(userRepository.getById(id));
     }
 
-    public Page<UserView> list(Pageable pageable) {
+    public Page<UserView> list(final Pageable pageable) {
         return userRepository.findAll(pageable).map(userViewMapper::toUserView);
     }
 

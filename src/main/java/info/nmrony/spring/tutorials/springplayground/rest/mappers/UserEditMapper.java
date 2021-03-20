@@ -5,11 +5,14 @@ import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.mapstruct.AfterMapping;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import info.nmrony.spring.tutorials.springplayground.domain.entities.Role;
 import info.nmrony.spring.tutorials.springplayground.domain.entities.User;
@@ -22,6 +25,7 @@ import info.nmrony.spring.tutorials.springplayground.rest.dtos.UpdateUserRequest
 public abstract class UserEditMapper {
   private RoleRepository roleRepository;
 
+  @Autowired
   public void setRoleRepository(RoleRepository roleRepository) {
     this.roleRepository = roleRepository;
   }
@@ -34,12 +38,13 @@ public abstract class UserEditMapper {
   public abstract void update(UpdateUserRequest request, @MappingTarget User user);
 
   @AfterMapping
+  @Transactional
   protected void afterCreate(CreateUserRequest request, @MappingTarget User user) {
     if (request.getRoles() != null) {
-      user.setRoles(request.getRoles().stream()
-          .map(role -> roleRepository.findById(role.getName())
-              .orElseThrow(() -> new ResourceNotFoundException(Role.class, role.getName())))
-          .collect(Collectors.toSet()));
+        user.setRoles(request.getRoles().stream()
+        .map(role -> roleRepository.findById(role.getName())
+            .orElseThrow(() -> new ResourceNotFoundException(Role.class, role.getName())))
+        .collect(Collectors.toSet()));
     }
   }
 
