@@ -54,8 +54,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
     protected ResponseEntity<Object> handleMissingServletRequestParameter(
             final MissingServletRequestParameterException exception, final HttpHeaders headers, final HttpStatus status,
             final WebRequest request) {
-        final String error = exception.getParameterName() + " parameter is missing";
-        return buildResponseEntity(new RestApiException(HttpStatus.BAD_REQUEST, error, exception));
+        return buildResponseEntity(new RestApiException(HttpStatus.BAD_REQUEST,
+                exception.getParameterName() + " parameter is missing", exception));
     }
 
     /**
@@ -299,9 +299,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<Object> handleAllUncaughtException(final Exception exception, final WebRequest request) {
-        log.error("Unknown error occurred", exception);
+        exception.printStackTrace();
         return buildResponseEntity(
-                new RestApiException(HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage(), exception));
+                new RestApiException(HttpStatus.INTERNAL_SERVER_ERROR,
+                        "something went wrong!! please contact with administrator.  ", exception));
     }
 
 }
