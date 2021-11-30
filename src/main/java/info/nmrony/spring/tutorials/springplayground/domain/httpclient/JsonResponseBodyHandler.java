@@ -1,4 +1,4 @@
-package info.nmrony.spring.tutorials.springplayground.utils;
+package info.nmrony.spring.tutorials.springplayground.domain.httpclient;
 
 import java.io.IOException;
 import java.io.InputStream;

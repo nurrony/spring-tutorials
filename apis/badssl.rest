@@ -1,0 +1,4 @@
+@APIURL=http://localhost:8080
+
+###
+GET {{APIURL}}/api/ssl-tester/selfsigned HTTP/1.1
