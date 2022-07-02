@@ -1,0 +1,42 @@
+@HostUrl = http://localhost:8080
+
+
+GET {{HostUrl}}/api/projects  HTTP/1.1
+user-id: 1
+company-id: 1
+Content-Type: application/json
+
+###
+POST {{HostUrl}}/api/projects HTTP/1.1
+user-id: 1
+company-id: 1
+Content-Type: application/json
+
+{
+  "name": "Pennyperfect",
+  "customer": { "id": 1 },
+  "jobs": [
+    { "name": "refactor job" },
+    { "name": "refactor project" }
+  ]
+}
+
+###
+
+PUT {{HostUrl}}/api/projects/1 HTTP/1.1
+user-id: 1
+company-id: 1
+Content-Type: application/json
+
+{
+  "name": "Pennyperfect",
+  "ownerId": 1,
+  "companyId": 1,
+  "jobs": [ { "id": 1, "name": "refactor job" } ]
+}
+
+###
+DELETE {{HostUrl}}/api/projects/1 HTTP/1.1
+user-id: 1
+company-id: 1
+Content-Type: application/json

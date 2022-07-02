@@ -1,0 +1,12 @@
+@HostUrl = http://localhost:8080
+###
+POST {{HostUrl}}/api/jobs  HTTP/1.1
+user-id: 1
+company-id: 1
+Content-Type: application/json
+
+{
+  "name": "hello",
+  "ownerId": 1,
+  "companyId": 1
+}
