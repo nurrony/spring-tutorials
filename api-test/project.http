@@ -36,7 +36,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE {{HostUrl}}/api/projects/1 HTTP/1.1
+DELETE {{HostUrl}}/api/projects/3 HTTP/1.1
 user-id: 1
 company-id: 1
 Content-Type: application/json

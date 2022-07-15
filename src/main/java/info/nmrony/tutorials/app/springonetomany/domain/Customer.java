@@ -63,7 +63,7 @@ public class Customer implements Serializable {
     project.setCustomer(this);
   }
 
-  public void removeJob(Project project) {
+  public void removeProject(Project project) {
     projects.remove(project);
     project.setCustomer(null);
   }
