@@ -1,5 +1,7 @@
 package info.nmrony.spring.tutorials.one2many.services;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import info.nmrony.spring.tutorials.one2many.domain.Job;
@@ -10,6 +12,7 @@ import info.nmrony.spring.tutorials.one2many.utils.AppUtils;
 import lombok.RequiredArgsConstructor;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class JobService {
     private final JobRepository jobRepository;
