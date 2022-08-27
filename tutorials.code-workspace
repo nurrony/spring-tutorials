@@ -1,0 +1,48 @@
+{
+    "folders": [
+        {
+            "path": "one2many"
+        },
+        {
+            "path": "security-security-jwt-rbac"
+        },
+        {
+            "path": "spring-ssl-test"
+        }
+    ],
+    "settings": {
+        "java.configuration.updateBuildConfiguration": "interactive"
+    },
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "console": "internalConsole",
+                "cwd": "${workspaceFolder:one2many}",
+                "envFile": "${workspaceFolder:one2many}/.env",
+                "type": "java",
+                "name": "one2many",
+                "request": "launch",
+                "mainClass": "info.nmrony.spring.tutorials.one2many.One2manyApplication"
+            },
+            {
+                "console": "internalConsole",
+                "type": "java",
+                "request": "launch",
+                "name": "security-rbac",
+                "cwd": "${workspaceFolder:security-security-jwt-rbac}",
+                "projectName": "security-rbac",
+                "mainClass": "info.nmrony.spring.tutorials.security_rbac.SecurityRbacApplication"
+            },
+            {
+                "console": "internalConsole",
+                "type": "java",
+                "request": "launch",
+                "name": "ssl-test",
+                "cwd": "${workspaceFolder:spring-ssl-test}",
+                "projectName": "ssl-test",
+                "mainClass": "info.nmrony.spring.tutorials.ssltest.SslTestApplication"
+            }
+        ]
+    }
+}
