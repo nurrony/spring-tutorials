@@ -1,12 +1,16 @@
 spring:
+  flyway:
+    enabled: false
+    # locations:
+    #   - classpath:db/migration/{vendor}
   datasource:
     url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
-    # open-in-view: false
+    open-in-view: false
     show-sql: true
-    generate-ddl: true
+    generate-ddl: false
     database-platform: org.hibernate.dialect.MySQL57InnoDBDialect
     hibernate:
       ddl-auto: update

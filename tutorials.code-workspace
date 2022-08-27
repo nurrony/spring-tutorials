@@ -48,11 +48,11 @@
             },
             {
                 "console": "internalConsole",
+                "envFile": "${workspaceFolder:flyway}/.env",
                 "type": "java",
                 "request": "launch",
                 "name": "flyway",
                 "cwd": "${workspaceFolder:flyway}",
-                "projectName": "flyway",
                 "mainClass": "info.nmrony.spring.tutorials.flyway.FlywayApplication"
             }
         ]
