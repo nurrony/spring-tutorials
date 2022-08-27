@@ -4,10 +4,13 @@
             "path": "one2many"
         },
         {
-            "path": "security-security-jwt-rbac"
+            "path": "flyway"
         },
         {
-            "path": "spring-ssl-test"
+            "path": "security-jwt-rbac"
+        },
+        {
+            "path": "ssl-test"
         }
     ],
     "settings": {
@@ -29,9 +32,9 @@
                 "console": "internalConsole",
                 "type": "java",
                 "request": "launch",
-                "name": "security-rbac",
-                "cwd": "${workspaceFolder:security-security-jwt-rbac}",
-                "projectName": "security-rbac",
+                "name": "security-jwt-rbac",
+                "cwd": "${workspaceFolder:security-jwt-rbac}",
+                "projectName": "security-jwt-rbac",
                 "mainClass": "info.nmrony.spring.tutorials.security_rbac.SecurityRbacApplication"
             },
             {
@@ -39,9 +42,18 @@
                 "type": "java",
                 "request": "launch",
                 "name": "ssl-test",
-                "cwd": "${workspaceFolder:spring-ssl-test}",
+                "cwd": "${workspaceFolder:ssl-test}",
                 "projectName": "ssl-test",
                 "mainClass": "info.nmrony.spring.tutorials.ssltest.SslTestApplication"
+            },
+            {
+                "console": "internalConsole",
+                "type": "java",
+                "request": "launch",
+                "name": "flyway",
+                "cwd": "${workspaceFolder:flyway}",
+                "projectName": "flyway",
+                "mainClass": "info.nmrony.spring.tutorials.flyway.FlywayApplication"
             }
         ]
     }
