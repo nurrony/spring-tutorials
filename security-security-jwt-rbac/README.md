@@ -20,3 +20,5 @@ Sample project demonstrating configuration and usage of Spring Security framewor
 -   Role Based Authorization - RBAC
 
 # Importing Initial Roles and Permissions
+
+Import `seed.sql` given under `db` directory
