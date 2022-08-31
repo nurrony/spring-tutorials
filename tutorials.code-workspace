@@ -11,6 +11,9 @@
         },
         {
             "path": "ssl-test"
+        },
+        {
+            "path": "events-demo"
         }
     ],
     "settings": {
@@ -52,8 +55,18 @@
                 "type": "java",
                 "request": "launch",
                 "name": "flyway",
+                "projectName": "flyway",
                 "cwd": "${workspaceFolder:flyway}",
                 "mainClass": "info.nmrony.spring.tutorials.flyway.FlywayApplication"
+            },
+            {
+                "console": "internalConsole",
+                "type": "java",
+                "request": "launch",
+                "name": "events-demo",
+                "projectName": "events-demo",
+                "cwd": "${workspaceFolder:events-demo}",
+                "mainClass": "info.nmrony.spring.tutorials.eventsdemo.EventsDemoApplication"
             }
         ]
     }

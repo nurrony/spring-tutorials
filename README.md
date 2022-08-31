@@ -8,3 +8,4 @@ Playground and Tutorials on Spring Framework
 -   [Spring Bidirectional One-to-Many Relation](https://github.com/nurrony/spring-tutorials/tree/main/one2many)
 -   [Spring SSL and cURL](https://github.com/nurrony/spring-tutorials/tree/main/ssl-test)
 -   [Spring Flyway Migration](https://github.com/nurrony/spring-tutorials/tree/main/flyway)
+-   [Events Demo](https://github.com/nurrony/spring-tutorials/tree/main/events-demo)
