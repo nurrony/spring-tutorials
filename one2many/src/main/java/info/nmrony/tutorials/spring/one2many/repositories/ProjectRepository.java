@@ -1,11 +1,11 @@
-package info.nmrony.spring.tutorials.one2many.repositories;
+package info.nmrony.tutorials.spring.one2many.repositories;
 
 import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import info.nmrony.spring.tutorials.one2many.domain.Project;
+import info.nmrony.tutorials.spring.one2many.domain.Project;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 

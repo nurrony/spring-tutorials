@@ -1,4 +1,4 @@
-package info.nmrony.spring.tutorials.one2many.utils;
+package info.nmrony.tutorials.spring.one2many.utils;
 
 import java.beans.PropertyDescriptor;
 import java.util.HashSet;

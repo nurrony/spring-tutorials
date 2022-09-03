@@ -7,7 +7,7 @@
         <version>2.7.3</version>
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
-    <groupId>info.nmrony.spring.tutorials</groupId>
+    <groupId>info.nmrony.tutorials.spring</groupId>
     <artifactId>one2many</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>one2many</name>

@@ -1,4 +1,4 @@
-package info.nmrony.spring.tutorials.one2many.domain;
+package info.nmrony.tutorials.spring.one2many.domain;
 
 import java.io.Serializable;
 import java.time.Instant;

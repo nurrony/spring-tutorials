@@ -1,4 +1,4 @@
-package info.nmrony.spring.tutorials.one2many;
+package info.nmrony.tutorials.spring.one2many;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

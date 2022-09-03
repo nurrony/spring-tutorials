@@ -1,14 +1,14 @@
-package info.nmrony.spring.tutorials.one2many.services;
+package info.nmrony.tutorials.spring.one2many.services;
 
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
-import info.nmrony.spring.tutorials.one2many.domain.Job;
-import info.nmrony.spring.tutorials.one2many.domain.Project;
-import info.nmrony.spring.tutorials.one2many.repositories.JobRepository;
-import info.nmrony.spring.tutorials.one2many.repositories.ProjectRepository;
-import info.nmrony.spring.tutorials.one2many.utils.AppUtils;
+import info.nmrony.tutorials.spring.one2many.domain.Job;
+import info.nmrony.tutorials.spring.one2many.domain.Project;
+import info.nmrony.tutorials.spring.one2many.repositories.JobRepository;
+import info.nmrony.tutorials.spring.one2many.repositories.ProjectRepository;
+import info.nmrony.tutorials.spring.one2many.utils.AppUtils;
 import lombok.RequiredArgsConstructor;
 
 @Service

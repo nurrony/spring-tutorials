@@ -1,4 +1,4 @@
-package info.nmrony.spring.tutorials.one2many.rest;
+package info.nmrony.tutorials.spring.one2many.rest;
 
 import java.util.Set;
 
@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import info.nmrony.spring.tutorials.one2many.domain.Job;
-import info.nmrony.spring.tutorials.one2many.services.JobService;
+import info.nmrony.tutorials.spring.one2many.domain.Job;
+import info.nmrony.tutorials.spring.one2many.services.JobService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
