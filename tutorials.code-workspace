@@ -29,7 +29,7 @@
                 "type": "java",
                 "name": "one2many",
                 "request": "launch",
-                "mainClass": "info.nmrony.spring.tutorials.one2many.One2manyApplication"
+                "mainClass": "info.nmrony.tutorials.spring.one2many.One2manyApplication"
             },
             {
                 "console": "internalConsole",
