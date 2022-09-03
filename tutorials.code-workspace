@@ -47,7 +47,7 @@
                 "name": "ssl-test",
                 "cwd": "${workspaceFolder:ssl-test}",
                 "projectName": "ssl-test",
-                "mainClass": "info.nmrony.spring.tutorials.ssltest.SslTestApplication"
+                "mainClass": "info.nmrony.tutorials.spring.ssltest.SslTestApplication"
             },
             {
                 "console": "internalConsole",

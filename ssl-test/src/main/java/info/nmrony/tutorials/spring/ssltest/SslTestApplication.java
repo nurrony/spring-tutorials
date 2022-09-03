@@ -1,4 +1,4 @@
-package info.nmrony.spring.tutorials.ssltest;
+package info.nmrony.tutorials.spring.ssltest;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

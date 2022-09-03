@@ -1,4 +1,4 @@
-package info.nmrony.spring.tutorials.ssltest;
+package info.nmrony.tutorials.spring.ssltest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

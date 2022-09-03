@@ -1,4 +1,4 @@
-package info.nmrony.spring.tutorials.ssltest.rest;
+package info.nmrony.tutorials.spring.ssltest.rest;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package info.nmrony.spring.tutorials.ssltest.domain;
+package info.nmrony.tutorials.spring.ssltest.domain;
 
 import java.net.URI;
 import java.net.http.HttpClient;

@@ -1,4 +1,4 @@
-package info.nmrony.spring.tutorials.ssltest.rest;
+package info.nmrony.tutorials.spring.ssltest.rest;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import info.nmrony.spring.tutorials.ssltest.domain.HttpRequester;
+import info.nmrony.tutorials.spring.ssltest.domain.HttpRequester;
 
 /**
  * @author Nur Rony
