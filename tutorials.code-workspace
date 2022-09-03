@@ -57,7 +57,7 @@
                 "name": "flyway",
                 "projectName": "flyway",
                 "cwd": "${workspaceFolder:flyway}",
-                "mainClass": "info.nmrony.spring.tutorials.flyway.FlywayApplication"
+                "mainClass": "info.nmrony.tutorials.spring.flyway.FlywayApplication"
             },
             {
                 "console": "internalConsole",

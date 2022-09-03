@@ -1,4 +1,4 @@
-package info.nmrony.spring.tutorials.flyway.domain;
+package info.nmrony.tutorials.spring.flyway.domain;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

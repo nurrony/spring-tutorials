@@ -1,6 +1,7 @@
-package info.nmrony.spring.tutorials.flyway.domain;
+package info.nmrony.tutorials.spring.flyway.domain;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
@@ -18,19 +19,19 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "permissions")
-public class Permission implements Serializable {
+@Table(name = "roles")
+public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @NotNull
-    @Size(max = 50)
-    @Column(length = 50, unique = true)
+    @Size(max = 20)
+    @Column(length = 20, unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "permissions")
-    private Set<Role> roles;
+    @ManyToMany
+    private Set<Permission> permissions = Collections.emptySet();
 
     // ----------------- system related methods ------
     @Override
@@ -41,7 +42,7 @@ public class Permission implements Serializable {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        final Permission other = (Permission) obj;
+        final Role other = (Role) obj;
         return Objects.equals(name, other.getName());
     }
 
@@ -52,7 +53,7 @@ public class Permission implements Serializable {
 
     @Override
     public String toString() {
-        return "Permission[name = " + getName() + "]";
+        return "Role[name = " + getName() + "]";
     }
 
 }

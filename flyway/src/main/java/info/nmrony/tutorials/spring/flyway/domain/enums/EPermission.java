@@ -1,4 +1,4 @@
-package info.nmrony.spring.tutorials.flyway.domain.enums;
+package info.nmrony.tutorials.spring.flyway.domain.enums;
 
 public enum EPermission {
     READ,
