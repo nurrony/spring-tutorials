@@ -12,6 +12,7 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import info.nmrony.spring.tutorials.security_rbac.domain.entities.Role;
@@ -21,7 +22,7 @@ import info.nmrony.spring.tutorials.security_rbac.repositories.RoleRepository;
 import info.nmrony.spring.tutorials.security_rbac.rest.dtos.CreateUserRequest;
 import info.nmrony.spring.tutorials.security_rbac.rest.dtos.UpdateUserRequest;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public abstract class UserEditMapper {
     private RoleRepository roleRepository;
 
