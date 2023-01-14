@@ -1,5 +1,6 @@
 package info.nmrony.spring.tutorials.security_rbac.utils;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -50,6 +51,52 @@ public class HttpClientUtils {
             final Class<T> responseType, final Map<String, String> headersMap) throws Exception {
         final HttpRequest.Builder requestBuilder = HttpRequest.newBuilder().uri(URI.create(url))
                 .POST(HttpRequest.BodyPublishers.ofString(json));
+        if (!headersMap.isEmpty()) {
+            headersMap.entrySet().forEach(entry -> requestBuilder.header(entry.getKey(), entry.getValue()));
+        }
+        final HttpRequest request = requestBuilder.header("Content-Type", "application/json; charset: UTF-8").build();
+        return httpClient.sendAsync(request, new JsonResponseBodyHandler<>(responseType))
+                .thenApply(response -> response.body().get());
+    }
+
+    public static <T> T putJson(final String url, final String json, final Class<T> responseType,
+            final Map<String, String> headersMap) throws IOException, InterruptedException {
+        final HttpRequest.Builder requestBuilder = HttpRequest.newBuilder().uri(URI.create(url))
+                .PUT(HttpRequest.BodyPublishers.ofString(json));
+        if (!headersMap.isEmpty()) {
+            headersMap.entrySet().forEach(entry -> requestBuilder.header(entry.getKey(), entry.getValue()));
+        }
+        final HttpRequest request = requestBuilder.header("Content-Type", "application/json; charset: UTF-8").build();
+        return httpClient.send(request, new JsonResponseBodyHandler<>(responseType)).body().get();
+
+    }
+
+    public static <T> CompletableFuture<T> putJsonAsync(final String url, final String json,
+            final Class<T> responseType, final Map<String, String> headersMap) throws Exception {
+        final HttpRequest.Builder requestBuilder = HttpRequest.newBuilder().uri(URI.create(url))
+                .PUT(HttpRequest.BodyPublishers.ofString(json));
+        if (!headersMap.isEmpty()) {
+            headersMap.entrySet().forEach(entry -> requestBuilder.header(entry.getKey(), entry.getValue()));
+        }
+        final HttpRequest request = requestBuilder.header("Content-Type", "application/json; charset: UTF-8").build();
+        return httpClient.sendAsync(request, new JsonResponseBodyHandler<>(responseType))
+                .thenApply(response -> response.body().get());
+    }
+
+    public static <T> T deleteJson(final String url, final String json, final Class<T> responseType,
+            final Map<String, String> headersMap) throws IOException, InterruptedException {
+        final HttpRequest.Builder requestBuilder = HttpRequest.newBuilder().uri(URI.create(url)).DELETE();
+        if (!headersMap.isEmpty()) {
+            headersMap.entrySet().forEach(entry -> requestBuilder.header(entry.getKey(), entry.getValue()));
+        }
+        final HttpRequest request = requestBuilder.header("Content-Type", "application/json; charset: UTF-8").build();
+        return httpClient.send(request, new JsonResponseBodyHandler<>(responseType)).body().get();
+
+    }
+
+    public static <T> CompletableFuture<T> deleteJsonAsync(final String url,
+            final Class<T> responseType, final Map<String, String> headersMap) throws Exception {
+        final HttpRequest.Builder requestBuilder = HttpRequest.newBuilder().uri(URI.create(url)).DELETE();
         if (!headersMap.isEmpty()) {
             headersMap.entrySet().forEach(entry -> requestBuilder.header(entry.getKey(), entry.getValue()));
         }
