@@ -3,6 +3,7 @@ package info.nmrony.spring.tutorials.security_rbac.rest.mappers;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -11,7 +12,7 @@ import info.nmrony.spring.tutorials.security_rbac.configs.security.JwtTokenProvi
 import info.nmrony.spring.tutorials.security_rbac.rest.dtos.AuthRequest;
 import info.nmrony.spring.tutorials.security_rbac.rest.dtos.AuthResponse;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public abstract class AuthMapper {
 
     public static final AuthMapper INSTANCE = Mappers.getMapper(AuthMapper.class);
