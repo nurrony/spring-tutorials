@@ -10,10 +10,12 @@ import org.springframework.cache.annotation.Caching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import info.nmrony.spring.tutorials.security_rbac.domain.entities.User;
 import info.nmrony.spring.tutorials.security_rbac.exceptions.ResourceNotFoundException;
 
+@Repository
 @CacheConfig(cacheNames = "users")
 public interface UserRepository extends JpaRepository<User, Long> {
 
