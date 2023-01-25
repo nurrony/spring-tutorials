@@ -173,6 +173,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @param exception the Exception
      * @return the Error object
      */
+    @SuppressWarnings("null")
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     protected ResponseEntity<Object> handleMethodArgumentTypeMismatch(
             final MethodArgumentTypeMismatchException exception, final WebRequest request) {
