@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "description": "Email client version",
+      "name": "application.version",
+      "type": "java.lang.String"
+    }
+  ]
+}

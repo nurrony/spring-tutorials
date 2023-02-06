@@ -1,0 +1,71 @@
+application:
+  version: 1.0.0
+
+---
+server:
+  port: 8080
+
+---
+# spring application metadata
+spring:
+  application:
+    name: nmr-spring-emailer
+
+---
+# spring datasource, jpa and hibernate configuration
+spring:
+  jackson:
+    time-zone: UTC
+    serialization:
+      indent-output: true
+    property-naming-strategy: SNAKE_CASE
+  # sql:
+  #   init:
+  #     mode: always
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    defer-datasource-initialization: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      hibernate:
+        "[generate_statistics]": false
+        "[format_sql]": true
+        type: DEBUG
+        jdbc:
+          "[time_zone]": UTC
+          "[batch_size]": 20
+        id:
+          "[new_generator_mappings]": true
+        connection:
+          "[provider_disables_autocommit]": true
+        # cache:
+        #   "[use_second_level_cache]": true
+        #   "[use_query_cache]": false
+        # enable_lazy_load_no_trans: true
+        event:
+          merge:
+            "[entity_copy_observer]": allow
+    hibernate:
+      ddl-auto: update
+  datasource:
+    username: postgres
+    password: nmrony
+    url: jdbc:postgresql://pgserver15.nmrony.localhost:5432/nmrony_spring_tutorials?currentSchema=email_client
+    hikari:
+      poolName: EmailClientDbHikari
+      auto-commit: false
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+
+---
+## SpringOpenApiDoc Settings
+springdoc:
+  api-docs:
+    enabled: true
+    path: /rest-api-docs
+  swagger-ui.path: /swagger-ui

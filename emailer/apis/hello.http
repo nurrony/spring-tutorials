@@ -1,0 +1,26 @@
+GET http://localhost:8080/api/hello
+
+GET http://localhost:8080/api/email-accounts
+
+GET http://localhost:8080/api/email-accounts/1
+Content-Type: application/json
+
+POST http://localhost:8080/api/email-accounts
+Content-Type: application/json
+
+{
+  "email": "pro.nmrony@gmail.com",
+  "verified": true,
+  "active": true,
+  "fetchProtocolEnabled": true,
+  "fetchProtocolConnected": true,
+  "fetchProtocol": "POP3",
+  "credential": {
+    "host": "pop.gmail.com",
+    "requireSsl": true,
+    "requireAuthentication": true,
+    "port": 995,
+    "username": "pro.nmrony@gmail.com",
+    "password": "123456"
+  }
+}
