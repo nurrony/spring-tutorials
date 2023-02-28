@@ -9,6 +9,11 @@ import info.nmrony.spring.tutorials.security_rbac.responses.SuccessResponse.With
 import info.nmrony.spring.tutorials.security_rbac.responses.SuccessResponse.WithResource;
 
 final public class ResponseUtils {
+
+    private ResponseUtils() {
+        throw new IllegalStateException("ResponseUtils is a utitily class. You can not instantiate it.");
+    }
+
     final public static SuccessResponse.SimpleResponse buildResponse(String message, int statusCode) {
         return SuccessResponse.SimpleResponse().message(message).statusCode(statusCode).build();
     }
