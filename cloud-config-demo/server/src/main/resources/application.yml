@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: nmr-spring-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: file:///Volumes/Devzone/experiments/javazone/spring-projects/tutorials/cloud-config-demo/configs/order-ms.yml
+server:
+  port: 9000
