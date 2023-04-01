@@ -1,3 +1,6 @@
+server:
+  port: 8888
+
 spring:
   application:
     name: nmr-spring-config-server
@@ -5,6 +8,10 @@ spring:
     config:
       server:
         git:
-          uri: file:///Volumes/Devzone/experiments/javazone/spring-projects/tutorials/cloud-config-demo/configs/order-ms.yml
-server:
-  port: 9000
+          uri: https://github.com/nurrony/spring-config-server-demo-configs
+          cloneOnStart: true
+          force-pull: true
+          skip-ssl-validation: true
+          searchPaths:
+            - "{application}"
+            - "common/*"
