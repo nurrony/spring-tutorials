@@ -9,3 +9,4 @@ Playground and Tutorials on Spring Framework
 -   [Spring Flyway Migration](flyway)
 -   [Spring SSL and cURL](ssl-test)
 -   [Spring Events Demo](events-demo)
+-   [Spring Events Demo](cloud-config-demo)
