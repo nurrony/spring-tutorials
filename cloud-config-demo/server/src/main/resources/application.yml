@@ -12,6 +12,4 @@ spring:
           cloneOnStart: true
           force-pull: true
           skip-ssl-validation: true
-          searchPaths:
-            - "{application}"
-            - "common/*"
+          searchPaths: "{application}"
