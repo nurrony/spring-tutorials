@@ -10,9 +10,9 @@ spring:
       uri: http://localhost:8888
       fail-fast: true
       retry:
-        max-attempts: 20
-        max-interval: 15000
-        initial-interval: 10000
+        max-attempts: 3
+        max-interval: 5000
+        initial-interval: 1000
 
 management:
   endpoints:
