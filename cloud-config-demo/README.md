@@ -7,7 +7,6 @@ This file demonstrate spring config server both client and application part.
 This config server searches config repostiory as following patterns
 
 -   {application}
--   common/\*\*
 
 So it can load configs as following patterns from config git repostiory
 
