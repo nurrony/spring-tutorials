@@ -12,17 +12,15 @@ This config server searches config repostiory as following patterns
 So it can load configs as following patterns from config git repostiory
 
 ```
- .
-├──  common
-│  └──  upload-limit
-│     ├──  application-dev.yml
-│     └──  application-prod.yml
-├──  order-ms
-│  ├──  application-dev.yml
-│  └──  application-prod.yml
-└──  sales-ms
-   ├──  application-dev.yml
-   └──  application-prod.yml
+├── order-ms
+│  ├── application-dev.yml
+│  ├── application-prod.yml
+│  ├── application-rony.yml
+│  └── application.yml
+└── upload-limit
+   ├── application-dev.yml
+   ├── application-prod.yml
+   └── application.yml
 ```
 
 Check [spring-config-server-demo](https://github.com/nurrony/spring-config-server-demo-configs) for details
