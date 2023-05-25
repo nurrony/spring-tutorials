@@ -1,5 +1,7 @@
 package info.nmrony.spring.tutorials.security_rbac.configs.security;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -50,37 +53,26 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        // Enable CORS and disable CSRF
-        http = http.httpBasic().disable();
-        // Enable CORS and disable CSRF
-        http = http.cors().and().csrf().disable();
-
-        // Set session management to stateless
-        http = http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and();
-
-        // Set unauthorized requests exception handler
-        http = http.exceptionHandling().authenticationEntryPoint((request, response, ex) -> {
-            log.error("Unauthorized request - {}", ex.getMessage());
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
-        }).and();
-
-        // Set permissions on endpoints
-        // @ formatter: off
-        http.authorizeRequests()
-                // Swagger endpoints must be publicly accessible
-                .antMatchers("/").permitAll() //
-                .antMatchers(String.format("%s/**", restApiDocPath)).permitAll() //
-                .antMatchers(String.format("%s/**", swaggerPath)).permitAll() //
-                // Our public endpoints
-                .antMatchers("/api/auth/**").permitAll() //
-                .antMatchers("/api/users/register").permitAll() //
-                // Our private endpoints
-                .anyRequest().authenticated();
-        // @ formatter: on
-
-        // Add JWT token filter
-        http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
-        return http.build();
+        return http
+                .httpBasic(withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
+                .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(auth -> {
+                    // Our public endpoints
+                    auth.antMatchers("/").permitAll();
+                    auth.antMatchers(String.format("%s/**", restApiDocPath)).permitAll();
+                    auth.antMatchers(String.format("%s/**", swaggerPath)).permitAll();
+                    auth.antMatchers("/api/auth/**").permitAll();
+                    auth.antMatchers("/api/users/register").permitAll();
+                    // Our private endpoints
+                    auth.anyRequest().authenticated();
+                })
+                .exceptionHandling(handling -> handling.authenticationEntryPoint((request, response, ex) -> {
+                    log.error("Unauthorized request - {}", ex.getMessage());
+                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
+                })).build();
     }
 
     // Used by spring security if CORS is enabled.
