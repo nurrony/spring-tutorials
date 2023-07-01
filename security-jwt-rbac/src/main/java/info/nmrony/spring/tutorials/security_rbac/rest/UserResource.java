@@ -1,7 +1,5 @@
 package info.nmrony.spring.tutorials.security_rbac.rest;
 
-import javax.validation.Valid;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +10,7 @@ import info.nmrony.spring.tutorials.security_rbac.domain.utils.ResponseUtils;
 import info.nmrony.spring.tutorials.security_rbac.responses.ApiResponse;
 import info.nmrony.spring.tutorials.security_rbac.rest.dtos.CreateUserRequest;
 import info.nmrony.spring.tutorials.security_rbac.services.security.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController

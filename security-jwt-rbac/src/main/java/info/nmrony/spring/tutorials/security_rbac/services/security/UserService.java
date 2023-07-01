@@ -3,12 +3,11 @@ package info.nmrony.spring.tutorials.security_rbac.services.security;
 import java.util.Optional;
 import java.util.Set;
 
-import javax.transaction.Transactional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import info.nmrony.spring.tutorials.security_rbac.domain.constants.Roles;
 import info.nmrony.spring.tutorials.security_rbac.domain.entities.Role;

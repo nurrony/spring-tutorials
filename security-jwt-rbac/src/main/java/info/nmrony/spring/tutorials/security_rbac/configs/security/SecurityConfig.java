@@ -2,15 +2,13 @@ package info.nmrony.spring.tutorials.security_rbac.configs.security;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -23,6 +21,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,7 +29,7 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-@EnableGlobalMethodSecurity(securedEnabled = true, jsr250Enabled = true, prePostEnabled = true)
+@EnableMethodSecurity(jsr250Enabled = true, securedEnabled = true, prePostEnabled = true)
 public class SecurityConfig {
 
     @Value("${springdoc.api-docs.path:''}")
@@ -61,11 +60,11 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> {
                     // Our public endpoints
-                    auth.antMatchers("/").permitAll();
-                    auth.antMatchers(String.format("%s/**", restApiDocPath)).permitAll();
-                    auth.antMatchers(String.format("%s/**", swaggerPath)).permitAll();
-                    auth.antMatchers("/api/auth/**").permitAll();
-                    auth.antMatchers("/api/users/register").permitAll();
+                    auth.requestMatchers("/").permitAll();
+                    auth.requestMatchers(String.format("%s/**", restApiDocPath)).permitAll();
+                    auth.requestMatchers(String.format("%s/**", swaggerPath)).permitAll();
+                    auth.requestMatchers("/api/auth/**").permitAll();
+                    auth.requestMatchers("/api/users/register").permitAll();
                     // Our private endpoints
                     auth.anyRequest().authenticated();
                 })

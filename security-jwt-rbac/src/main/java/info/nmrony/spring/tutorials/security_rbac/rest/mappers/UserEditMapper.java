@@ -5,8 +5,6 @@ import static org.mapstruct.NullValuePropertyMappingStrategy.IGNORE;
 
 import java.util.stream.Collectors;
 
-import javax.transaction.Transactional;
-
 import org.mapstruct.AfterMapping;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
@@ -14,6 +12,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.ReportingPolicy;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import info.nmrony.spring.tutorials.security_rbac.domain.entities.Role;
 import info.nmrony.spring.tutorials.security_rbac.domain.entities.User;

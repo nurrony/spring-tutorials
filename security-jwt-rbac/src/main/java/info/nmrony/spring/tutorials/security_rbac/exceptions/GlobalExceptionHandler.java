@@ -1,8 +1,6 @@
 package info.nmrony.spring.tutorials.security_rbac.exceptions;
 
 import javax.naming.AuthenticationException;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.ConstraintViolationException;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -29,6 +27,8 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import io.jsonwebtoken.MalformedJwtException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -50,7 +50,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @param request   WebRequest
      * @return the Error object
      */
-    @Override
     protected ResponseEntity<Object> handleMissingServletRequestParameter(
             final MissingServletRequestParameterException exception, final HttpHeaders headers, final HttpStatus status,
             final WebRequest request) {
@@ -68,7 +67,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @param request   WebRequest
      * @return the Error object
      */
-    @Override
     protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(final HttpMediaTypeNotSupportedException exception,
             final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
         final StringBuilder builder = new StringBuilder();
@@ -90,7 +88,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @param request   WebRequest
      * @return the Error object
      */
-    @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException exception,
             final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
         final RestApiException apiError = new RestApiException(HttpStatus.BAD_REQUEST);
@@ -110,7 +107,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @param request   WebRequest
      * @return the Error object
      */
-    @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(final HttpMessageNotReadableException exception,
             final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
         final ServletWebRequest servletWebRequest = (ServletWebRequest) request;
@@ -128,7 +124,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @param request
      * @return
      */
-    @Override
     protected ResponseEntity<Object> handleNoHandlerFoundException(final NoHandlerFoundException exception,
             final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
         final RestApiException apiError = new RestApiException(HttpStatus.BAD_REQUEST);
@@ -190,19 +185,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @param EntityNotFoundException exception
      * @return
      */
-    @ExceptionHandler(javax.persistence.EntityNotFoundException.class)
-    protected ResponseEntity<Object> handleEntityNotFound(final javax.persistence.EntityNotFoundException exception) {
+    @ExceptionHandler(jakarta.persistence.EntityNotFoundException.class)
+    protected ResponseEntity<Object> handleEntityNotFound(final jakarta.persistence.EntityNotFoundException exception) {
         return buildResponseEntity(new RestApiException(HttpStatus.NOT_FOUND, exception));
     }
 
-    @Override
     protected ResponseEntity<Object> handleHttpMessageNotWritable(final HttpMessageNotWritableException ex,
             final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
         final String error = "Error writing JSON output";
         return buildResponseEntity(new RestApiException(HttpStatus.INTERNAL_SERVER_ERROR, error, ex));
     }
 
-    @Override
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(
             final HttpRequestMethodNotSupportedException exception, final HttpHeaders headers, final HttpStatus status,
             final WebRequest request) {

@@ -1,7 +1,5 @@
 package info.nmrony.spring.tutorials.security_rbac.rest;
 
-import javax.validation.Valid;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
@@ -18,6 +16,7 @@ import info.nmrony.spring.tutorials.security_rbac.rest.mappers.AuthMapper;
 import info.nmrony.spring.tutorials.security_rbac.services.security.UserService;
 import info.nmrony.spring.tutorials.security_rbac.utils.AppUtils;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController

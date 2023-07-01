@@ -1,7 +1,5 @@
 package info.nmrony.spring.tutorials.security_rbac.rest;
 
-import javax.annotation.security.RolesAllowed;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import info.nmrony.spring.tutorials.security_rbac.domain.constants.Roles;
 import info.nmrony.spring.tutorials.security_rbac.domain.utils.ResponseUtils;
 import info.nmrony.spring.tutorials.security_rbac.responses.ApiResponse;
+import jakarta.annotation.security.RolesAllowed;
 
 @RestController
 @RequestMapping("/api")

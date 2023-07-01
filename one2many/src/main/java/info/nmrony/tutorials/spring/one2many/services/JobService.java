@@ -1,8 +1,7 @@
 package info.nmrony.tutorials.spring.one2many.services;
 
-import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import info.nmrony.tutorials.spring.one2many.domain.Job;
 import info.nmrony.tutorials.spring.one2many.domain.Project;

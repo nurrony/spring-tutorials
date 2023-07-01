@@ -3,9 +3,8 @@ package info.nmrony.tutorials.spring.one2many.services;
 import java.util.List;
 import java.util.Set;
 
-import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import info.nmrony.tutorials.spring.one2many.domain.Project;
 import info.nmrony.tutorials.spring.one2many.repositories.ProjectRepository;

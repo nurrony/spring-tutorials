@@ -2,9 +2,8 @@ package info.nmrony.spring.tutorials.security_rbac.rest.dtos;
 
 import java.util.Set;
 
-import javax.validation.constraints.NotBlank;
-
 import info.nmrony.spring.tutorials.security_rbac.domain.entities.Role;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data

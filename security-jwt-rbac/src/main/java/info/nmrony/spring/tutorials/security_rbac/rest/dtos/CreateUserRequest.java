@@ -2,12 +2,11 @@ package info.nmrony.spring.tutorials.security_rbac.rest.dtos;
 
 import java.util.Set;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-
 import info.nmrony.spring.tutorials.security_rbac.domain.entities.Role;
 import info.nmrony.spring.tutorials.security_rbac.domain.validators.PasswordsEqualConstraint;
 import info.nmrony.spring.tutorials.security_rbac.domain.validators.UsernameExistConstraint;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
