@@ -5,6 +5,7 @@ import java.util.Collection;
 import org.springframework.data.domain.Page;
 
 import info.nmrony.spring.tutorials.security_rbac.responses.SuccessResponse;
+import info.nmrony.spring.tutorials.security_rbac.responses.SuccessResponse.WithMixedContentResource;
 import info.nmrony.spring.tutorials.security_rbac.responses.SuccessResponse.WithPaginatedResourceCollection;
 import info.nmrony.spring.tutorials.security_rbac.responses.SuccessResponse.WithResource;
 
@@ -14,30 +15,40 @@ final public class ResponseUtils {
         throw new IllegalStateException("ResponseUtils is a utitily class. You can not instantiate it.");
     }
 
-    final public static SuccessResponse.SimpleResponse buildResponse(String message, int statusCode) {
-        return SuccessResponse.SimpleResponse().message(message).statusCode(statusCode).build();
+    final public static SuccessResponse.SimpleResponse buildResponse(String message) {
+        return SuccessResponse.SimpleResponse().message(message).build();
     }
 
     @SuppressWarnings("unchecked")
-    final public static <T> SuccessResponse.WithResource<T> buildResourceResponse(Collection<T> data, String message,
-            int statusCode) {
-
-        return (WithResource<T>) SuccessResponse.WithResource().statusCode(statusCode).message(message).data(data)
-                .build();
+    final public static <T> SuccessResponse.WithResource<T> buildResourceResponse(Collection<T> data, String message) {
+        return (WithResource<T>) SuccessResponse.WithResource().message(message).data(data).build();
     }
 
     @SuppressWarnings("unchecked")
-    final public static <T> SuccessResponse.WithResource<T> buildResourceResponse(T data, String message,
-            int statusCode) {
-        return (WithResource<T>) SuccessResponse.WithResource().statusCode(statusCode).message(message).data(data)
+    final public static <T> SuccessResponse.WithResource<T> buildResourceResponse(T data, String message) {
+        return (WithResource<T>) SuccessResponse.WithResource().message(message).data(data).build();
+    }
+
+    @SuppressWarnings("unchecked")
+    final public static <T, E> SuccessResponse.WithMixedContentResource<T, E> buildMixedContentResponse(T data,
+            E errors, String message) {
+        return (WithMixedContentResource<T, E>) SuccessResponse.WithMixedContentResource()
+                .message(message)
+                .data(data)
+                .errors(errors)
                 .build();
     }
 
     @SuppressWarnings("unchecked")
     final public static <T> SuccessResponse.WithPaginatedResourceCollection<T> buildPaginatedResponse(Page<T> page,
-            String message, int statusCode) {
+            String message) {
         return (WithPaginatedResourceCollection<T>) SuccessResponse.WithPaginatedResourceCollection()
-                .statusCode(statusCode).message(message).data(page.getContent()).size(page.getSize())
-                .totalPage(page.getTotalPages()).totalRecord(page.getTotalElements()).build();
+                .message(message)
+                .data(page.getContent())
+                .page(page.getPageable().getPageNumber())
+                .size(page.getSize())
+                .totalPage(page.getTotalPages())
+                .totalRecord(page.getTotalElements())
+                .build();
     }
 }

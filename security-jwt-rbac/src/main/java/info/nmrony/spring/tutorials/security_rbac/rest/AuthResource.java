@@ -37,7 +37,7 @@ public class AuthResource {
             }
 
             return ResponseEntity.ok().body(ResponseUtils.buildResourceResponse(authMapper.toAuthResponse(request),
-                    "Authentication is successfull", 200));
+                    "Authentication is successful."));
         } catch (BadCredentialsException | DisabledException exception) {
             throw exception;
         }
