@@ -41,11 +41,4 @@ public class PersonResource {
                 .ok(ResponseUtils.buildResourceResponse(personService.getById(id), "person fetched successfully", 200));
     }
 
-    @GetMapping(value = "{id}", )
-    public ResponseEntity<WithResource<Person>> getById(@PathVariable Integer id, HttpServletRequest request) {
-        log.info("uri = {} ", request.getRequestURI());
-        return ResponseEntity
-                .ok(ResponseUtils.buildResourceResponse(personService.getById(id), "person fetched successfully", 200));
-    }
-
 }
