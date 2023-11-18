@@ -22,10 +22,9 @@ public class AuthResource {
     private final AccountService accountService;
 
     @PostMapping("/register")
-    public ResponseEntity<AccountDto> createAccount(@Valid @RequestBody AccountDto request)
+    public ResponseEntity<AccountDto> createAccount(@Valid @RequestBody final AccountDto request)
             throws Exception {
         log.info("registering user {}", request.getNickname());
-        AccountDto registerAccount = accountService.registerAccount(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(registerAccount);
+        return ResponseEntity.status(HttpStatus.CREATED).body(accountService.registerAccount(request));
     }
 }
