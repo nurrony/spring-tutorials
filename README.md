@@ -11,4 +11,4 @@ Playground and Tutorials on Spring Framework
 -  [Spring Events Demo](events-demo)
 -  [Spring Cloud Config Sever-Client Demo](cloud-config-demo)
 -  [Spring Websocket Chat with Frontend](websocket)
--  [Spring Events with RESTful API](event-rest-ap)
+-  [Spring Events with RESTful API](event-rest-api)
