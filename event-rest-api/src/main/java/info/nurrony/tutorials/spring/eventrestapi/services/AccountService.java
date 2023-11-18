@@ -19,7 +19,7 @@ public class AccountService {
     private final AccountRepository accountRepository;
     private final AccountEventPublisher accountEventPublisher;
 
-    public void registerAccount(final AccountDto request) throws Exception {
+    public AccountDto registerAccount(final AccountDto request) throws Exception {
         final Account result = accountRepository.save(Account.builder()
                 .password(request.getPassword())
                 .nickname(request.getNickname())
@@ -28,6 +28,7 @@ public class AccountService {
                 .state(1).build());
 
         accountEventPublisher.pushCreateUserEvent(result.getId(), result.getUserName());
+        return AccountDto.ofEntity(result);
     }
 
 }
