@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import javax.crypto.SecretKey;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,8 +23,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,13 +56,7 @@ public class JwtTokenProvider {
         final var roles = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
         claims.put("ROLES", roles);
-        return generateToken(claims, user.getUsername());
-    }
-
-    private String generateToken(final Map<String, Object> claims, final String subject) {
-        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuer(jwtIssuer).setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY_SECONDS * 1000))
-                .signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
+        return generateToken(_generateClaims(claims, user.getUsername()));
     }
 
     @SuppressWarnings("unchecked")
@@ -70,9 +66,7 @@ public class JwtTokenProvider {
     }
 
     public String getUserId(final String token) {
-        final Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
-
-        return claims.getSubject().split(",")[0];
+        return getClaimFromToken(token, Claims::getSubject).split(",")[0];
     }
 
     // retrieve username from jwt token
@@ -81,8 +75,7 @@ public class JwtTokenProvider {
     }
 
     public String getUserEmail(final String token) {
-        final Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
-        return claims.getSubject().split(",")[2];
+        return getClaimFromToken(token, Claims::getSubject).split(",")[2];
 
     }
 
@@ -102,7 +95,8 @@ public class JwtTokenProvider {
 
     public boolean validate(final String token) {
         try {
-            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
+            SecretKey key = Keys.hmacShaKeyFor(jwtSecret.getBytes());
+            Jwts.parser().verifyWith(key).build().parseSignedClaims(token);
             return true;
         } catch (final MalformedJwtException ex) {
             log.error("Invalid JWT token - {}", ex.getMessage());
@@ -116,16 +110,34 @@ public class JwtTokenProvider {
         return false;
     }
 
-    private Claims getAllClaimsFromToken(final String token) {
-        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
-    }
-
     public Authentication authenticate(final String username, final String password) throws Exception {
         final UserDetails principal = userDetailsService.loadUserByUsername(username);
         final Authentication auth = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(principal, password, principal.getAuthorities()));
         SecurityContextHolder.getContext().setAuthentication(auth);
         return auth;
+    }
+
+    private Claims getAllClaimsFromToken(final String token) {
+        return Jwts.parser().verifyWith(getSigningKey(jwtSecret)).build().parseSignedClaims(token).getPayload();
+    }
+
+    private SecretKey getSigningKey(String secret) {
+        return Keys.hmacShaKeyFor(secret.getBytes());
+    }
+
+    private String generateToken(final Claims claims) {
+        return Jwts.builder().claims(claims).signWith(getSigningKey(jwtSecret)).compact();
+    }
+
+    private Claims _generateClaims(Map<String, ?> claims, String subject) {
+        return Jwts.claims()
+                .add(claims)
+                .subject(subject)
+                .issuer(jwtIssuer)
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY_SECONDS * 1000))
+                .build();
     }
 
 }
