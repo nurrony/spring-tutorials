@@ -2,7 +2,7 @@ spring:
   datasource:
     username: sa
     password: sa
-    url: jdbc:h2:file:./data.db
+    url: jdbc:h2:file:./database
     driverClassName: org.h2.Driver
   jpa:
     show-sql: true
