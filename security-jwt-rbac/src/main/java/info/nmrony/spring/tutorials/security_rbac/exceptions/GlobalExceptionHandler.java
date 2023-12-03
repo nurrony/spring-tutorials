@@ -1,5 +1,4 @@
 package info.nmrony.spring.tutorials.security_rbac.exceptions;
-package com.investar.oms.broker.core.exceptions;
 
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.core.Ordered;
