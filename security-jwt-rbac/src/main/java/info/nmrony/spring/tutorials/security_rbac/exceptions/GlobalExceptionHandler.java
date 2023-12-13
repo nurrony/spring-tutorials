@@ -48,6 +48,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
     }
 
     @Override
+    @SuppressWarnings("null")
     protected ResponseEntity<Object> handleExceptionInternal(Exception exception, Object body, HttpHeaders headers,
             HttpStatusCode statusCode, WebRequest request) {
         return buildResponseEntity(
