@@ -36,7 +36,8 @@
     ],
     "settings": {
         "java.configuration.updateBuildConfiguration": "interactive",
-        "java.compile.nullAnalysis.mode": "automatic"
+        "java.compile.nullAnalysis.mode": "automatic",
+        "dotenv.enableAutocloaking": false
     },
     "launch": {
         "version": "0.2.0",

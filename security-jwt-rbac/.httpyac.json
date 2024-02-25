@@ -1,0 +1,33 @@
+{
+  "environments": {
+    "$global": {
+      "ROLE_ADMIN": "ROLE_ADMIN",
+      "ROLE_MODERATOR": "ROLE_MODERATOR",
+      "ROLE_USER": "ROLE_USER"
+    },
+    "Local": {
+      "Admin": {
+        "firstName": "Nur",
+        "lastName": "Rony",
+        "password": "123456",
+        "confirmPassword": "123456",
+        "email": "rony@nmrony.info",
+        "username": "nmrony",
+        "roles": [
+          {
+            "name": "ROLE_ADMIN"
+          },
+          {
+            "name": "ROLE_USER"
+          }
+        ]
+      },
+      "APIURL": "http://localhost:8080",
+      "IdentityAuthority": "http://localhost:8000/api/oms/auth/authenticate"
+    }
+  },
+  "log": {
+    "level": 10,
+    "supportAnsiColors": true
+  }
+}
