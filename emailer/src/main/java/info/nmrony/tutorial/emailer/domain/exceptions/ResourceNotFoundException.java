@@ -14,6 +14,7 @@ public class ResourceNotFoundException extends RuntimeException {
                 Arrays.stream(searchParams).map(Object::toString).collect(Collectors.joining(", "))));
     }
 
+    @SuppressWarnings("null")
     private static String generateMessage(final String entity, String searchParams) {
         return StringUtils.capitalize(entity) + " was not found for parameters " + searchParams;
     }

@@ -31,8 +31,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(final HttpServletRequest request, final HttpServletResponse response,
-            final FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(@SuppressWarnings("null") final HttpServletRequest request, @SuppressWarnings("null") final HttpServletResponse response,
+            @SuppressWarnings("null") final FilterChain filterChain) throws ServletException, IOException {
         getJwtFromRequest(request).ifPresent(token -> {
             if (tokenProvider.validate(token)) {
                 final Authentication authentication = tokenProvider.getAuthentication(token);
