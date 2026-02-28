@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Data
 @Component
-@ConfigurationProperties(prefix = "itc.services.email")
+@ConfigurationProperties(prefix = "app.services.email")
 public class EmailProperties {
 
     private String username;
