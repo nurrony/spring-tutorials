@@ -1,0 +1,39 @@
+{
+  "properties": [
+    {
+      "description": "Username for IMAP server",
+      "name": "app.services.email.username",
+      "type": "java.lang.String"
+    },
+    {
+      "description": "Hostname for IMAP server",
+      "name": "app.services.email.host",
+      "type": "java.lang.String"
+    },
+    {
+      "description": "Port for IMAP server",
+      "name": "app.services.email.port",
+      "type": "java.lang.Integer"
+    },
+    {
+      "description": "Mailbox for IMAP server",
+      "name": "app.services.email.mailbox",
+      "type": "java.lang.String"
+    },
+    {
+      "description": "Polling rate for IMAP server",
+      "name": "app.services.email.pollRate",
+      "type": "java.lang.Integer"
+    },
+    {
+      "description": "Password for IMAP server",
+      "name": "app.services.email.password",
+      "type": "java.lang.String"
+    },
+    {
+      "description": "Subject Filter Keyword for IMAP server",
+      "name": "app.services.email.subjectFilterKeyword",
+      "type": "java.lang.String"
+    }
+  ]
+}
