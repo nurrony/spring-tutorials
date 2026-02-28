@@ -44,7 +44,7 @@ You **MUST** agree and follow these styleguides
 - A class and Methods must do what it is intend to do and do one thing.
 - Methods must not contains more that 30 lines.
 - Try your best to write Pure Method (a method that does not have side-effect outside of its lexical scope)
-- If-Else / Switch
+- If-Else/Switch
   - Best if you can avoid
   - Never nested more than 3 levels
   - Try to avoid using `else` block. IMHO, this is an unnecessary keyword
