@@ -1,4 +1,4 @@
-# ITC Email Service
+# Email Service
 
 This Repository contains code that fetches emails from an email using IMAP Protocol
 
@@ -63,8 +63,6 @@ You **MUST** agree and follow these styleguides
 We follow this RESTful API Guideline and each API must follow this [RESTful API Guideline](https://docs.google.com/document/d/1Pn0ASHaPZszQ_y2KdrnlzWZmcPF-8aV0cfstXlMxsuE/edit?usp=sharing)
 
 ## 💻 Feature Trackers
-
-Followings are added as initial commits. For details please check our [SuperCards Project](https://app.supercards.ca) Board
 
 - [x] Fetches Emails
 - [x] Parse Email
