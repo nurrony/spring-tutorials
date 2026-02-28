@@ -14,16 +14,19 @@ final public class AppUtils {
         throw new IllegalAccessException("AppUtils is a utility class and instantiation is not allowed.");
     }
 
+    @SuppressWarnings("null")
     public static void copyNonNullProperties(Object src, Object target) {
         BeanUtils.copyProperties(src, target, getNullPropertyNames(src));
     }
 
     public static String[] getNullPropertyNames(Object source) {
+        @SuppressWarnings("null")
         final BeanWrapper src = new BeanWrapperImpl(source);
         PropertyDescriptor[] pds = src.getPropertyDescriptors();
 
         Set<String> emptyNames = new HashSet<String>();
         for (PropertyDescriptor pd : pds) {
+            @SuppressWarnings("null")
             Object srcValue = src.getPropertyValue(pd.getName());
             if (srcValue == null)
                 emptyNames.add(pd.getName());

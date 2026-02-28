@@ -20,6 +20,7 @@ public class ResourceNotFoundException extends RuntimeException implements ApiEx
                 toMap(String.class, String.class, searchParamsMap.toString())));
     }
 
+    @SuppressWarnings("null")
     private static String generateMessage(final String entity, final Map<String, String> searchParams) {
         return StringUtils.capitalize(entity) + " was not found for parameters " + searchParams;
     }

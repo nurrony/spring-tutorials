@@ -14,9 +14,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import info.nmrony.spring.tutorials.security_rbac.domain.entities.User;
 import info.nmrony.spring.tutorials.security_rbac.exceptions.ResourceNotFoundException;
 
+@SuppressWarnings("null")
 @CacheConfig(cacheNames = "users")
 public interface UserRepository extends JpaRepository<User, Long> {
-
     @CacheEvict(allEntries = true)
     <S extends User> List<S> saveAll(Iterable<S> entities);
 

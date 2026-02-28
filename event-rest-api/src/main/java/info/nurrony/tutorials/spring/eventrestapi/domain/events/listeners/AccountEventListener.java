@@ -33,6 +33,7 @@ public class AccountEventListener {
         System.out.println("push Email To " + event.getUserName() + " Hello!");
     }
 
+    @SuppressWarnings("null")
     @EventListener // when createAccount
     @Transactional(rollbackFor = Exception.class)
     public void createDefaultPost(CreateAccountEvent event) {

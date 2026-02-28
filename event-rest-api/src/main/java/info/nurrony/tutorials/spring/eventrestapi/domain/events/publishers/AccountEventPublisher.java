@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AccountEventPublisher {
     private final ApplicationEventPublisher publisher;
 
+    @SuppressWarnings("null")
     public void pushCreateUserEvent(final Long userId, final String userName) {
         log.info(this.getClass().getName() + ".push create user event start!");
         log.info("userId : " + userId);
@@ -29,6 +30,7 @@ public class AccountEventPublisher {
                 .eventType(EventType.CREATE).build());
     }
 
+    @SuppressWarnings("null")
     public void pushLoginUserEvent(final String userId, final String userRole) {
         log.info(this.getClass().getName() + ".push login user event Start!");
         log.info("userId : " + userId);

@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 public class WebsocketEventListener {
     private final SimpMessageSendingOperations _sendingTemplate;
 
+    @SuppressWarnings("null")
     @EventListener
     public void sessionDisconnect(SessionDisconnectEvent event) {
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());

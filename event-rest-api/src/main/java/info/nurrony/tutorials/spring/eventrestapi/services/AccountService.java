@@ -19,6 +19,7 @@ public class AccountService {
     private final AccountRepository accountRepository;
     private final AccountEventPublisher accountEventPublisher;
 
+    @SuppressWarnings("null")
     public AccountDto registerAccount(final AccountDto request) throws Exception {
         final Account result = accountRepository.save(Account.builder()
                 .password(request.getPassword())

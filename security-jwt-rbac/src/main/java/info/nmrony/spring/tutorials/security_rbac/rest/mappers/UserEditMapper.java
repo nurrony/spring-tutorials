@@ -37,6 +37,7 @@ public abstract class UserEditMapper {
     @BeanMapping(nullValueCheckStrategy = ALWAYS, nullValuePropertyMappingStrategy = IGNORE)
     public abstract void update(UpdateUserRequest request, @MappingTarget User user);
 
+    @SuppressWarnings("null")
     @AfterMapping
     @Transactional
     protected void afterCreate(CreateUserRequest request, @MappingTarget User user) {
@@ -48,6 +49,7 @@ public abstract class UserEditMapper {
         }
     }
 
+    @SuppressWarnings("null")
     @AfterMapping
     protected void afterUpdate(UpdateUserRequest request, @MappingTarget User user) {
         if (request.getRoles() != null) {

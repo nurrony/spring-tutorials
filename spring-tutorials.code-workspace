@@ -1,43 +1,46 @@
 {
     "folders": [
         {
-            "path": "one2many"
+            "path": "one2many",
         },
         {
-            "path": "security-jwt-rbac"
+            "path": "security-jwt-rbac",
         },
         {
-            "path": "ssl-test"
+            "path": "ssl-test",
         },
         {
-            "path": "events-demo"
+            "path": "events-demo",
         },
         {
-            "path": "kafka"
+            "path": "kafka",
         },
         {
-            "path": "cloud-config-demo"
+            "path": "cloud-config-demo",
         },
         {
-            "path": "k8s/greetings"
+            "path": "k8s/greetings",
         },
         {
-            "path": "completablefuture-and-exception"
+            "path": "completablefuture-and-exception",
         },
         {
-            "path": "override-rest"
+            "path": "override-rest",
         },
         {
-            "path": "websocket"
+            "path": "websocket",
         },
         {
-            "path": "event-rest-api"
-        }
+            "path": "event-rest-api",
+        },
+        {
+            "path": "email-fetcher",
+        },
     ],
     "settings": {
         "java.configuration.updateBuildConfiguration": "interactive",
         "java.compile.nullAnalysis.mode": "automatic",
-        "dotenv.enableAutocloaking": false
+        "dotenv.enableAutocloaking": false,
     },
     "launch": {
         "version": "0.2.0",
@@ -49,7 +52,16 @@
                 "type": "java",
                 "name": "one2many",
                 "request": "launch",
-                "mainClass": "info.nmrony.tutorials.spring.one2many.One2manyApplication"
+                "mainClass": "info.nmrony.tutorials.spring.one2many.One2manyApplication",
+            },
+            {
+                "console": "internalConsole",
+                "cwd": "${workspaceFolder:email-fetcher}",
+                "envFile": "${workspaceFolder:email-fetcher}/.env",
+                "type": "java",
+                "name": "one2many",
+                "request": "launch",
+                "mainClass": "info.nmrony.tutorials.spring.one2many.One2manyApplication",
             },
             {
                 "console": "internalConsole",
@@ -59,7 +71,7 @@
                 "cwd": "${workspaceFolder:security-jwt-rbac}",
                 "envFile": "${workspaceFolder:security-jwt-rbac}/.env",
                 "projectName": "security-jwt-rbac",
-                "mainClass": "info.nmrony.spring.tutorials.security_rbac.SecurityRbacApplication"
+                "mainClass": "info.nmrony.spring.tutorials.security_rbac.SecurityRbacApplication",
             },
             {
                 "console": "internalConsole",
@@ -68,7 +80,7 @@
                 "name": "ssl-test",
                 "cwd": "${workspaceFolder:ssl-test}",
                 "projectName": "ssl-test",
-                "mainClass": "info.nmrony.tutorials.spring.ssltest.SslTestApplication"
+                "mainClass": "info.nmrony.tutorials.spring.ssltest.SslTestApplication",
             },
             {
                 "console": "internalConsole",
@@ -78,7 +90,7 @@
                 "name": "flyway",
                 "projectName": "flyway",
                 "cwd": "${workspaceFolder:flyway}",
-                "mainClass": "info.nmrony.tutorials.spring.flyway.FlywayApplication"
+                "mainClass": "info.nmrony.tutorials.spring.flyway.FlywayApplication",
             },
             {
                 "console": "internalConsole",
@@ -87,7 +99,7 @@
                 "name": "events-demo",
                 "projectName": "events-demo",
                 "cwd": "${workspaceFolder:events-demo}",
-                "mainClass": "info.nmrony.tutorials.spring.eventsdemo.EventsDemoApplication"
+                "mainClass": "info.nmrony.tutorials.spring.eventsdemo.EventsDemoApplication",
             },
 
             {
@@ -97,7 +109,7 @@
                 "name": "emailer",
                 "projectName": "emailer",
                 "cwd": "${workspaceFolder:emailer}",
-                "mainClass": "info.nmrony.tutorial.emailer.SpringEmailClientApplication"
+                "mainClass": "info.nmrony.tutorial.emailer.SpringEmailClientApplication",
             },
             {
                 "console": "internalConsole",
@@ -106,7 +118,7 @@
                 "name": "completable-future-exception",
                 "projectName": "completable-future-exception",
                 "cwd": "${workspaceFolder:completable-future-exception}",
-                "mainClass": "info.nurrony.tutorials.spring.cf.SpringCompletableFeatureApplication"
+                "mainClass": "info.nurrony.tutorials.spring.cf.SpringCompletableFeatureApplication",
             },
             {
                 "console": "internalConsole",
@@ -116,7 +128,7 @@
                 "projectName": "override-rest",
                 "vmArgs": "--enable-preview",
                 "cwd": "${workspaceFolder:override-rest}",
-                "mainClass": "info.nurrony.tutorials.spring.overriderest.RestOverrideApplication"
+                "mainClass": "info.nurrony.tutorials.spring.overriderest.RestOverrideApplication",
             },
             {
                 "console": "internalConsole",
@@ -126,7 +138,7 @@
                 "projectName": "exception-handling",
                 "vmArgs": "--enable-preview",
                 "cwd": "${workspaceFolder:exception-handling}",
-                "mainClass": "info.nmrony.tutorials.spring.exceptions.ExceptionDemoApplication"
+                "mainClass": "info.nmrony.tutorials.spring.exceptions.ExceptionDemoApplication",
             },
             {
                 "console": "internalConsole",
@@ -135,7 +147,7 @@
                 "type": "java",
                 "name": "websocket",
                 "request": "launch",
-                "mainClass": "info.nurrony.tutorials.spring.websocket.Applcaiton"
+                "mainClass": "info.nurrony.tutorials.spring.websocket.Applcaiton",
             },
             {
                 "console": "internalConsole",
@@ -144,8 +156,8 @@
                 "type": "java",
                 "name": "event-rest-api",
                 "request": "launch",
-                "mainClass": "info.nurrony.tutorials.spring.eventrestapi.EventRestApiApplication"
-            }
-        ]
-    }
+                "mainClass": "info.nurrony.tutorials.spring.eventrestapi.EventRestApiApplication",
+            },
+        ],
+    },
 }

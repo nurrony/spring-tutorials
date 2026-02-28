@@ -1,0 +1,10 @@
+POST http://localhost:8080/api/auth/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "state": 1,
+    "userName": "rony",
+    "password": "123456",
+    "nickname": "nur rony"
+
+}

@@ -37,6 +37,7 @@ public class ProjectService {
         return projectRepository.save(payload);
     }
 
+    @SuppressWarnings("null")
     public Project update(Long id, Long companyId, Project payload) {
         var project = projectRepository.findByIdAndCompanyId(id, companyId)
                 .orElseThrow(() -> new RuntimeException("Project Not found"));

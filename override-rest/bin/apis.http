@@ -1,0 +1,13 @@
+GET http://localhost:8080/api/v1/person/list HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+
+###
+GET http://localhost:8080/api/v1/persons HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+
+###
+GET http://localhost:8080/api/v1/persons/1 HTTP/1.1
+Content-Type: application/json
+Accept: application/json

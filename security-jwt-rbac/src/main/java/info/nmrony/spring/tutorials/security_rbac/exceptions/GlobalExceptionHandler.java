@@ -37,13 +37,16 @@ import lombok.extern.slf4j.Slf4j;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler implements ApiException {
 
+    @SuppressWarnings("null")
     private ResponseEntity<Object> buildResponseEntity(final RestApiException apiError) {
         return new ResponseEntity<>(apiError, apiError.getName());
     }
 
     @Override
-    protected ResponseEntity<Object> handleAsyncRequestTimeoutException(AsyncRequestTimeoutException ex,
-            HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+    protected ResponseEntity<Object> handleAsyncRequestTimeoutException(
+            @SuppressWarnings("null") AsyncRequestTimeoutException ex,
+            @SuppressWarnings("null") HttpHeaders headers, @SuppressWarnings("null") HttpStatusCode status,
+            @SuppressWarnings("null") WebRequest request) {
         return buildResponseEntity(new RestApiException(HttpStatus.REQUEST_TIMEOUT, ex.getMessage(), ex));
     }
 
@@ -56,8 +59,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
     }
 
     @Override
-    protected ResponseEntity<Object> handleHttpMediaTypeNotAcceptable(HttpMediaTypeNotAcceptableException ex,
-            HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+    protected ResponseEntity<Object> handleHttpMediaTypeNotAcceptable(
+            @SuppressWarnings("null") HttpMediaTypeNotAcceptableException ex,
+            @SuppressWarnings("null") HttpHeaders headers, @SuppressWarnings("null") HttpStatusCode status,
+            @SuppressWarnings("null") WebRequest request) {
         return buildResponseEntity(new RestApiException(HttpStatus.NOT_ACCEPTABLE, ex.getMessage(), ex));
     }
 
@@ -72,8 +77,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return the Error object
      */
     @Override
-    protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException exception,
-            HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+    protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(
+            @SuppressWarnings("null") HttpMediaTypeNotSupportedException exception,
+            @SuppressWarnings("null") HttpHeaders headers, @SuppressWarnings("null") HttpStatusCode status,
+            @SuppressWarnings("null") WebRequest request) {
         final StringBuilder builder = new StringBuilder();
         builder.append(exception.getContentType());
         builder.append(" media type is not supported. Supported media types are ");
@@ -93,8 +100,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return the Error object
      */
     @Override
-    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException exception,
-            HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(
+            @SuppressWarnings("null") HttpMessageNotReadableException exception,
+            @SuppressWarnings("null") HttpHeaders headers, @SuppressWarnings("null") HttpStatusCode status,
+            @SuppressWarnings("null") WebRequest request) {
         final ServletWebRequest servletWebRequest = (ServletWebRequest) request;
         log.info("{} to {}", servletWebRequest.getHttpMethod(), servletWebRequest.getRequest().getServletPath());
         final String error = "Malformed JSON request";
@@ -112,23 +121,28 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return the Error object
      */
     @Override
-    protected ResponseEntity<Object> handleHttpMessageNotWritable(HttpMessageNotWritableException ex,
-            HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+    protected ResponseEntity<Object> handleHttpMessageNotWritable(
+            @SuppressWarnings("null") HttpMessageNotWritableException ex,
+            @SuppressWarnings("null") HttpHeaders headers, @SuppressWarnings("null") HttpStatusCode status,
+            @SuppressWarnings("null") WebRequest request) {
         final String error = "Error writing JSON output";
         return buildResponseEntity(new RestApiException(HttpStatus.INTERNAL_SERVER_ERROR, error, ex));
     }
 
     @Override
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(
-            HttpRequestMethodNotSupportedException exception,
-            HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+            @SuppressWarnings("null") HttpRequestMethodNotSupportedException exception,
+            @SuppressWarnings("null") HttpHeaders headers, @SuppressWarnings("null") HttpStatusCode status,
+            @SuppressWarnings("null") WebRequest request) {
         return buildResponseEntity(
                 new RestApiException(HttpStatus.METHOD_NOT_ALLOWED, "Method not allowed", exception));
     }
 
     @Override
-    protected ResponseEntity<Object> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException exception,
-            HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+    protected ResponseEntity<Object> handleMaxUploadSizeExceededException(
+            @SuppressWarnings("null") MaxUploadSizeExceededException exception,
+            @SuppressWarnings("null") HttpHeaders headers, @SuppressWarnings("null") HttpStatusCode status,
+            @SuppressWarnings("null") WebRequest request) {
         return buildResponseEntity(
                 new RestApiException(HttpStatus.BAD_REQUEST, "Max upload size exceeded", exception));
     }
@@ -155,8 +169,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return the Error object
      */
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,
-            HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            @SuppressWarnings("null") MethodArgumentNotValidException exception,
+            @SuppressWarnings("null") HttpHeaders headers, @SuppressWarnings("null") HttpStatusCode status,
+            @SuppressWarnings("null") WebRequest request) {
         final RestApiException apiError = new RestApiException(HttpStatus.BAD_REQUEST);
         apiError.setMessage("Validation error");
         apiError.addValidationErrors(exception.getBindingResult().getFieldErrors());
@@ -165,9 +181,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
     }
 
     @Override
-    protected ResponseEntity<Object> handleMethodValidationException(MethodValidationException exception,
-            HttpHeaders headers,
-            HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleMethodValidationException(
+            @SuppressWarnings("null") MethodValidationException exception,
+            @SuppressWarnings("null") HttpHeaders headers,
+            @SuppressWarnings("null") HttpStatus status, @SuppressWarnings("null") WebRequest request) {
         final RestApiException apiError = new RestApiException(HttpStatus.BAD_REQUEST);
         apiError.setMessage("Validation error");
 
@@ -185,15 +202,19 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return the Error object
      */
     @Override
-    protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex,
-            HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+    protected ResponseEntity<Object> handleMissingServletRequestParameter(
+            @SuppressWarnings("null") MissingServletRequestParameterException ex,
+            @SuppressWarnings("null") HttpHeaders headers, @SuppressWarnings("null") HttpStatusCode status,
+            @SuppressWarnings("null") WebRequest request) {
         return buildResponseEntity(
                 new RestApiException(HttpStatus.BAD_REQUEST, ex.getParameterName() + " parameter is missing", ex));
     }
 
     @Override
-    protected ResponseEntity<Object> handleMissingServletRequestPart(MissingServletRequestPartException ex,
-            HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+    protected ResponseEntity<Object> handleMissingServletRequestPart(
+            @SuppressWarnings("null") MissingServletRequestPartException ex,
+            @SuppressWarnings("null") HttpHeaders headers, @SuppressWarnings("null") HttpStatusCode status,
+            @SuppressWarnings("null") WebRequest request) {
         return buildResponseEntity(
                 new RestApiException(HttpStatus.BAD_REQUEST, ex.getRequestPartName() + " part is missing", ex));
     }
@@ -208,9 +229,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      * @return
      */
     @Override
-    protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException exception,
-            HttpHeaders headers,
-            HttpStatusCode status, WebRequest request) {
+    protected ResponseEntity<Object> handleNoHandlerFoundException(
+            @SuppressWarnings("null") NoHandlerFoundException exception,
+            @SuppressWarnings("null") HttpHeaders headers,
+            @SuppressWarnings("null") HttpStatusCode status, @SuppressWarnings("null") WebRequest request) {
         final RestApiException apiError = new RestApiException(HttpStatus.BAD_REQUEST);
         apiError.setMessage(String.format("Could not find the %s method for URL %s", exception.getHttpMethod(),
                 exception.getRequestURL()));
@@ -222,8 +244,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
      *
      */
     @Override
-    protected ResponseEntity<Object> handleNoResourceFoundException(NoResourceFoundException exception,
-            HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+    protected ResponseEntity<Object> handleNoResourceFoundException(
+            @SuppressWarnings("null") NoResourceFoundException exception,
+            @SuppressWarnings("null") HttpHeaders headers, @SuppressWarnings("null") HttpStatusCode status,
+            @SuppressWarnings("null") WebRequest request) {
         final RestApiException apiError = new RestApiException(HttpStatus.NOT_FOUND);
         apiError.setMessage(exception.getMessage());
         return buildResponseEntity(apiError);
@@ -244,8 +268,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
     }
 
     @Override
-    protected ResponseEntity<Object> handleServletRequestBindingException(ServletRequestBindingException ex,
-            HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+    protected ResponseEntity<Object> handleServletRequestBindingException(
+            @SuppressWarnings("null") ServletRequestBindingException ex,
+            @SuppressWarnings("null") HttpHeaders headers, @SuppressWarnings("null") HttpStatusCode status,
+            @SuppressWarnings("null") WebRequest request) {
         return buildResponseEntity(
                 new RestApiException(HttpStatus.BAD_REQUEST, ex.getMessage(), ex));
     }
@@ -268,8 +294,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler imple
     }
 
     @Override
-    protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex, HttpHeaders headers,
-            HttpStatusCode status, WebRequest request) {
+    protected ResponseEntity<Object> handleTypeMismatch(@SuppressWarnings("null") TypeMismatchException ex,
+            @SuppressWarnings("null") HttpHeaders headers,
+            @SuppressWarnings("null") HttpStatusCode status, @SuppressWarnings("null") WebRequest request) {
         return buildResponseEntity(
                 new RestApiException(HttpStatus.BAD_REQUEST, ex.getMessage(), ex));
     }

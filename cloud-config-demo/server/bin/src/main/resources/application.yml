@@ -1,0 +1,15 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: nmr-spring-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/nurrony/spring-config-server-demo-configs
+          cloneOnStart: true
+          force-pull: true
+          skip-ssl-validation: true
+          searchPaths: "{application}"

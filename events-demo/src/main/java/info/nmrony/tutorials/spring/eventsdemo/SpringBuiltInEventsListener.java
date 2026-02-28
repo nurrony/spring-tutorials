@@ -12,7 +12,7 @@ class SpringBuiltInEventsListener implements ApplicationListener<SpringApplicati
     ApplicationContext applicationContext;
 
     @Override
-    public void onApplicationEvent(SpringApplicationEvent event) {
+    public void onApplicationEvent(@SuppressWarnings("null") SpringApplicationEvent event) {
         System.out.println("SpringApplicationEvent Received - " + event);
 
         // Initializing publisher for user defined event
@@ -20,7 +20,8 @@ class SpringBuiltInEventsListener implements ApplicationListener<SpringApplicati
     }
 
     @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    public void setApplicationContext(@SuppressWarnings("null") ApplicationContext applicationContext)
+            throws BeansException {
         this.applicationContext = applicationContext;
     }
 

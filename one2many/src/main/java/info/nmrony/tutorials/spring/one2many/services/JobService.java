@@ -29,6 +29,7 @@ public class JobService {
         return jobRepository.save(payload);
     }
 
+    @SuppressWarnings("null")
     public Job update(Long id, Long companyId, Job payload) {
         Project project = null;
         var projectId = payload.getProject().getId();

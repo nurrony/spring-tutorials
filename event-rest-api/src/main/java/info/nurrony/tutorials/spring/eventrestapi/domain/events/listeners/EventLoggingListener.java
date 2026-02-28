@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 public class EventLoggingListener {
     private final EventLogRepository eventRepository;
 
+    @SuppressWarnings("null")
     @EventListener
     public void loggingAccountEvent(AccountEvent event) {
         log.info(this.getClass().getName() + ".account event logging Start!");
