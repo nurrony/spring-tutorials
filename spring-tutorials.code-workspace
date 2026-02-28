@@ -36,6 +36,9 @@
         {
             "path": "email-fetcher",
         },
+        {
+            "path": "emailer",
+        },
     ],
     "settings": {
         "java.configuration.updateBuildConfiguration": "interactive",
@@ -53,6 +56,15 @@
                 "name": "one2many",
                 "request": "launch",
                 "mainClass": "info.nmrony.tutorials.spring.one2many.One2manyApplication",
+            },
+            {
+                "console": "internalConsole",
+                "cwd": "${workspaceFolder:emailer}",
+                "envFile": "${workspaceFolder:emailer}/.env",
+                "type": "java",
+                "name": "emailer",
+                "request": "launch",
+                "mainClass": "info.nmrony.tutorial.emailer.Main",
             },
             {
                 "console": "internalConsole",
